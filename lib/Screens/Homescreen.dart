@@ -80,7 +80,7 @@ class _HomescreenState extends State<Homescreen>
           Text("camera"),
           ChatPage(),
           Text("Status"),
-          Text("Calss"),
+          Text("Calls"),
         ],
       ),
     );
