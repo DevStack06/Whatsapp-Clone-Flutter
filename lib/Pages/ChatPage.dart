@@ -1,3 +1,4 @@
+import 'package:chatapp/CustomUI/CustomCard.dart';
 import 'package:flutter/material.dart';
 
 class ChatPage extends StatefulWidget {
@@ -14,6 +15,12 @@ class _ChatPageState extends State<ChatPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: Icon(Icons.chat),
+      ),
+      body: ListView(
+        children: [
+          CustomCard(),
+          CustomCard(),
+        ],
       ),
     );
   }
