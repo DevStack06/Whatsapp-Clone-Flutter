@@ -20,6 +20,8 @@ class _ChatPageState extends State<ChatPage> {
         children: [
           CustomCard(),
           CustomCard(),
+
+          // CustomCard(),
         ],
       ),
     );

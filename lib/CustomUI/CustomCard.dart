@@ -5,32 +5,54 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: CircleAvatar(
-        radius: 30,
-      ),
-      title: Text(
-        "Dev Stack",
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      subtitle: Row(
+    return InkWell(
+      onTap: () {
+        print("tapped");
+      },
+      child: Column(
         children: [
-          Icon(Icons.done_all),
-          SizedBox(
-            width: 3,
+          ListTile(
+            // contentPadding: EdgeInsets.only(left: 18, right: 18, top: 8),
+            leading: CircleAvatar(
+              radius: 30,
+              // backgroundColor: Colors.,
+              // child: Icon(Icons.group),
+            ),
+            title: Text(
+              "Dev Stack",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            subtitle: Row(
+              children: [
+                Icon(Icons.done_all),
+                SizedBox(
+                  width: 3,
+                ),
+                Text(
+                  "Hi Dev Stack",
+                  style: TextStyle(
+                    fontSize: 13,
+                  ),
+                ),
+              ],
+            ),
+            trailing: Text("18:04"),
           ),
-          Text(
-            "Hi Dev Stack",
-            style: TextStyle(
-              fontSize: 13,
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 80,
+              right: 15,
+              // top: 0,
+            ),
+            child: Divider(
+              thickness: 1,
             ),
           ),
         ],
       ),
-      trailing: Text("18:04"),
     );
   }
 }
