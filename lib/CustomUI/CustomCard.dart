@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomCard extends StatelessWidget {
   const CustomCard({Key key}) : super(key: key);
@@ -6,17 +7,19 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        print("tapped");
-      },
+      onTap: () {},
       child: Column(
         children: [
           ListTile(
-            // contentPadding: EdgeInsets.only(left: 18, right: 18, top: 8),
             leading: CircleAvatar(
               radius: 30,
-              // backgroundColor: Colors.,
-              // child: Icon(Icons.group),
+              child: SvgPicture.asset(
+                "assets/groups.svg",
+                color: Colors.white,
+                height: 37,
+                width: 37,
+              ),
+              backgroundColor: Colors.blueGrey,
             ),
             title: Text(
               "Dev Stack",
@@ -42,11 +45,7 @@ class CustomCard extends StatelessWidget {
             trailing: Text("18:04"),
           ),
           Padding(
-            padding: const EdgeInsets.only(
-              left: 80,
-              right: 15,
-              // top: 0,
-            ),
+            padding: const EdgeInsets.only(right: 20, left: 80),
             child: Divider(
               thickness: 1,
             ),

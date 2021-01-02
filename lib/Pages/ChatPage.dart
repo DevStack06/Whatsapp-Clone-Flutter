@@ -18,6 +18,9 @@ class _ChatPageState extends State<ChatPage> {
       ),
       body: ListView(
         children: [
+          SizedBox(
+            height: 4,
+          ),
           CustomCard(),
           CustomCard(),
 
