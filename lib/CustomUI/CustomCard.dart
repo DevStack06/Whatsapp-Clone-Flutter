@@ -12,7 +12,11 @@ class CustomCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (contex) => IndividualPage()));
+            context,
+            MaterialPageRoute(
+                builder: (contex) => IndividualPage(
+                      chatModel: chatModel,
+                    )));
       },
       child: Column(
         children: [
