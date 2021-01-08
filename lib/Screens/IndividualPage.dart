@@ -28,7 +28,7 @@ class _IndividualPageState extends State<IndividualPage> {
                   size: 24,
                 ),
                 CircleAvatar(
-                  radius: 18,
+                  radius: 20,
                   backgroundColor: Colors.blueGrey,
                 ),
               ],
@@ -37,7 +37,7 @@ class _IndividualPageState extends State<IndividualPage> {
           title: InkWell(
             onTap: () {},
             child: Container(
-              margin: EdgeInsets.all(3),
+              margin: EdgeInsets.all(5),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 // mainAxisAlignment: MainAxisAlignment.start,
@@ -45,20 +45,54 @@ class _IndividualPageState extends State<IndividualPage> {
                   Text(
                     "Dev Stack",
                     style: TextStyle(
-                      fontSize: 19,
-                      // fontWeight: FontWeight.w500,
+                      fontSize: 18.5,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                   Text(
                     "last seen today at 12:05",
                     style: TextStyle(
                       fontSize: 13,
+                      // fontWeight: FontWeight.w500,
                     ),
                   ),
                 ],
               ),
             ),
           ),
+          actions: [
+            IconButton(icon: Icon(Icons.videocam), onPressed: () {}),
+            IconButton(icon: Icon(Icons.call), onPressed: () {}),
+            PopupMenuButton<String>(
+              onSelected: (value) {
+                print(value);
+              },
+              itemBuilder: (BuildContext contesxt) {
+                return [
+                  PopupMenuItem(
+                    child: Text("New group"),
+                    value: "New group",
+                  ),
+                  PopupMenuItem(
+                    child: Text("New broadcast"),
+                    value: "New broadcast",
+                  ),
+                  PopupMenuItem(
+                    child: Text("Whatsapp Web"),
+                    value: "Whatsapp Web",
+                  ),
+                  PopupMenuItem(
+                    child: Text("Starred messages"),
+                    value: "Starred messages",
+                  ),
+                  PopupMenuItem(
+                    child: Text("Settings"),
+                    value: "Settings",
+                  ),
+                ];
+              },
+            ),
+          ],
         ),
       ),
     );
