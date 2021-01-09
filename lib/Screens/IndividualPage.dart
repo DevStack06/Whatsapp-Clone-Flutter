@@ -116,78 +116,69 @@ class _IndividualPageState extends State<IndividualPage> {
         width: MediaQuery.of(context).size.width,
         child: Stack(
           children: [
-            Align(
-              child: ListView(
-                children: [],
-              ),
-            ),
+            ListView(),
             Align(
               alignment: Alignment.bottomCenter,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
-                    width: MediaQuery.of(context).size.width - 55,
+                    width: MediaQuery.of(context).size.width - 60,
                     child: Card(
-                      // elevation: 8,
                       margin: EdgeInsets.only(left: 2, right: 2, bottom: 8),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25.0),
+                        borderRadius: BorderRadius.circular(25),
                       ),
-                      child: TextField(
-                        cursorColor: Colors.red,
+                      child: TextFormField(
                         textAlignVertical: TextAlignVertical.center,
                         keyboardType: TextInputType.multiline,
                         maxLines: 5,
                         minLines: 1,
                         decoration: InputDecoration(
                           border: InputBorder.none,
+                          hintText: "Type a message",
+                          hintStyle: TextStyle(color: Colors.grey),
                           prefixIcon: IconButton(
                             icon: Icon(
-                              Icons.emoji_emotions_outlined,
-                              size: 25,
+                              Icons.emoji_emotions,
                             ),
                             onPressed: () {},
                           ),
                           suffixIcon: Row(
                             mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
+                            children: [
                               IconButton(
-                                icon: Icon(
-                                  Icons.attach_file,
-                                  size: 25,
-                                ),
+                                icon: Icon(Icons.attach_file),
                                 onPressed: () {},
                               ),
                               IconButton(
-                                icon: Icon(
-                                  Icons.camera_alt,
-                                  size: 25,
-                                ),
+                                icon: Icon(Icons.camera_alt),
                                 onPressed: () {},
                               ),
                             ],
                           ),
                           contentPadding: EdgeInsets.all(5),
-                          hintText: "Type a message",
-                          hintStyle: TextStyle(
-                            color: Colors.grey,
-                          ),
                         ),
                       ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8, right: 2),
+                    padding: const EdgeInsets.only(
+                      bottom: 8,
+                      right: 5,
+                      left: 2,
+                    ),
                     child: CircleAvatar(
                       radius: 25,
                       backgroundColor: Color(0xFF128C7E),
-                      child: Icon(
-                        Icons.mic,
-                        color: Colors.white,
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.mic,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {},
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
