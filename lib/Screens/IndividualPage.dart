@@ -14,6 +14,7 @@ class _IndividualPageState extends State<IndividualPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60),
         child: AppBar(
@@ -106,6 +107,89 @@ class _IndividualPageState extends State<IndividualPage> {
                   ),
                 ];
               },
+            ),
+          ],
+        ),
+      ),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Stack(
+          children: [
+            Align(
+              child: ListView(
+                children: [],
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width - 55,
+                    child: Card(
+                      // elevation: 8,
+                      margin: EdgeInsets.only(left: 2, right: 2, bottom: 8),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                      ),
+                      child: TextField(
+                        cursorColor: Colors.red,
+                        textAlignVertical: TextAlignVertical.center,
+                        keyboardType: TextInputType.multiline,
+                        maxLines: 5,
+                        minLines: 1,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          prefixIcon: IconButton(
+                            icon: Icon(
+                              Icons.emoji_emotions_outlined,
+                              size: 25,
+                            ),
+                            onPressed: () {},
+                          ),
+                          suffixIcon: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              IconButton(
+                                icon: Icon(
+                                  Icons.attach_file,
+                                  size: 25,
+                                ),
+                                onPressed: () {},
+                              ),
+                              IconButton(
+                                icon: Icon(
+                                  Icons.camera_alt,
+                                  size: 25,
+                                ),
+                                onPressed: () {},
+                              ),
+                            ],
+                          ),
+                          contentPadding: EdgeInsets.all(5),
+                          hintText: "Type a message",
+                          hintStyle: TextStyle(
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8, right: 2),
+                    child: CircleAvatar(
+                      radius: 25,
+                      backgroundColor: Color(0xFF128C7E),
+                      child: Icon(
+                        Icons.mic,
+                        color: Colors.white,
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ],
         ),
