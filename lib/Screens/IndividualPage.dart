@@ -1,4 +1,5 @@
 import 'package:chatapp/Model/ChatModel.dart';
+import 'package:emoji_picker/emoji_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -11,6 +12,23 @@ class IndividualPage extends StatefulWidget {
 }
 
 class _IndividualPageState extends State<IndividualPage> {
+  bool show = false;
+  FocusNode focusNode = FocusNode();
+  TextEditingController textEditingController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    focusNode.addListener(_onFocusChange);
+  }
+
+  void _onFocusChange() {
+    if (focusNode.hasFocus) {
+      setState(() {
+        show = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,77 +132,120 @@ class _IndividualPageState extends State<IndividualPage> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child: Stack(
-          children: [
-            ListView(),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Row(
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width - 60,
-                    child: Card(
-                      margin: EdgeInsets.only(left: 2, right: 2, bottom: 8),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      child: TextFormField(
-                        textAlignVertical: TextAlignVertical.center,
-                        keyboardType: TextInputType.multiline,
-                        maxLines: 5,
-                        minLines: 1,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "Type a message",
-                          hintStyle: TextStyle(color: Colors.grey),
-                          prefixIcon: IconButton(
-                            icon: Icon(
-                              Icons.emoji_emotions,
+        child: WillPopScope(
+          child: Stack(
+            children: [
+              ListView(),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width - 55,
+                          child: Card(
+                            margin:
+                                EdgeInsets.only(left: 2, right: 2, bottom: 8),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25),
                             ),
-                            onPressed: () {},
-                          ),
-                          suffixIcon: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              IconButton(
-                                icon: Icon(Icons.attach_file),
-                                onPressed: () {},
+                            child: TextFormField(
+                              controller: textEditingController,
+                              focusNode: focusNode,
+                              textAlignVertical: TextAlignVertical.center,
+                              keyboardType: TextInputType.multiline,
+                              maxLines: 5,
+                              minLines: 1,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Type a message",
+                                hintStyle: TextStyle(color: Colors.grey),
+                                prefixIcon: IconButton(
+                                  icon: Icon(
+                                    Icons.emoji_emotions_outlined,
+                                  ),
+                                  onPressed: () {
+                                    focusNode.unfocus();
+                                    focusNode.canRequestFocus = false;
+                                    setState(() {
+                                      show = !show;
+                                    });
+                                  },
+                                ),
+                                suffixIcon: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    IconButton(
+                                      icon: Icon(Icons.attach_file),
+                                      onPressed: () {},
+                                    ),
+                                    IconButton(
+                                      icon: Icon(Icons.camera_alt),
+                                      onPressed: () {},
+                                    ),
+                                  ],
+                                ),
+                                contentPadding: EdgeInsets.all(5),
                               ),
-                              IconButton(
-                                icon: Icon(Icons.camera_alt),
-                                onPressed: () {},
-                              ),
-                            ],
+                            ),
                           ),
-                          contentPadding: EdgeInsets.all(5),
                         ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      bottom: 8,
-                      right: 5,
-                      left: 2,
-                    ),
-                    child: CircleAvatar(
-                      radius: 25,
-                      backgroundColor: Color(0xFF128C7E),
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.mic,
-                          color: Colors.white,
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            bottom: 8,
+                            right: 0,
+                            left: 2,
+                          ),
+                          child: CircleAvatar(
+                            radius: 25,
+                            backgroundColor: Color(0xFF128C7E),
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.mic,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {},
+                            ),
+                          ),
                         ),
-                        onPressed: () {},
-                      ),
+                      ],
                     ),
-                  ),
-                ],
+                    show ? bottomsheet() : Container(),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
+          onWillPop: onBackPress,
         ),
       ),
+    );
+  }
+
+  Future<bool> onBackPress() {
+    if (show) {
+      setState(() {
+        show = false;
+      });
+    } else {
+      Navigator.pop(context);
+    }
+
+    return Future.value(false);
+  }
+
+  Widget bottomsheet() {
+    return EmojiPicker(
+      rows: 4,
+      columns: 7,
+      onEmojiSelected: (emoji, category) {
+        setState(() {
+          textEditingController.text += emoji.emoji;
+        });
+        print(emoji);
+      },
     );
   }
 }
