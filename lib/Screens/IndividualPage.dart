@@ -14,19 +14,18 @@ class IndividualPage extends StatefulWidget {
 class _IndividualPageState extends State<IndividualPage> {
   bool show = false;
   FocusNode focusNode = FocusNode();
-  TextEditingController textEditingController = TextEditingController();
+  TextEditingController _controller = TextEditingController();
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
-    focusNode.addListener(_onFocusChange);
-  }
-
-  void _onFocusChange() {
-    if (focusNode.hasFocus) {
-      setState(() {
-        show = false;
-      });
-    }
+    focusNode.addListener(() {
+      if (focusNode.hasFocus) {
+        setState(() {
+          show = false;
+        });
+      }
+    });
   }
 
   @override
@@ -144,7 +143,7 @@ class _IndividualPageState extends State<IndividualPage> {
                     Row(
                       children: [
                         Container(
-                          width: MediaQuery.of(context).size.width - 55,
+                          width: MediaQuery.of(context).size.width - 60,
                           child: Card(
                             margin:
                                 EdgeInsets.only(left: 2, right: 2, bottom: 8),
@@ -152,7 +151,7 @@ class _IndividualPageState extends State<IndividualPage> {
                               borderRadius: BorderRadius.circular(25),
                             ),
                             child: TextFormField(
-                              controller: textEditingController,
+                              controller: _controller,
                               focusNode: focusNode,
                               textAlignVertical: TextAlignVertical.center,
                               keyboardType: TextInputType.multiline,
@@ -181,10 +180,12 @@ class _IndividualPageState extends State<IndividualPage> {
                                       icon: Icon(Icons.attach_file),
                                       onPressed: () {},
                                     ),
-                                    IconButton(
-                                      icon: Icon(Icons.camera_alt),
-                                      onPressed: () {},
-                                    ),
+                                    _controller.text.length > 0
+                                        ? Container()
+                                        : IconButton(
+                                            icon: Icon(Icons.camera_alt),
+                                            onPressed: () {},
+                                          ),
                                   ],
                                 ),
                                 contentPadding: EdgeInsets.all(5),
@@ -195,7 +196,7 @@ class _IndividualPageState extends State<IndividualPage> {
                         Padding(
                           padding: const EdgeInsets.only(
                             bottom: 8,
-                            right: 0,
+                            right: 2,
                             left: 2,
                           ),
                           child: CircleAvatar(
@@ -203,7 +204,9 @@ class _IndividualPageState extends State<IndividualPage> {
                             backgroundColor: Color(0xFF128C7E),
                             child: IconButton(
                               icon: Icon(
-                                Icons.mic,
+                                _controller.text.length > 0
+                                    ? Icons.send
+                                    : Icons.mic,
                                 color: Colors.white,
                               ),
                               onPressed: () {},
@@ -212,40 +215,36 @@ class _IndividualPageState extends State<IndividualPage> {
                         ),
                       ],
                     ),
-                    show ? bottomsheet() : Container(),
+                    show ? emojiSelect() : Container(),
                   ],
                 ),
               ),
             ],
           ),
-          onWillPop: onBackPress,
+          onWillPop: () {
+            if (show) {
+              setState(() {
+                show = false;
+              });
+            } else {
+              Navigator.pop(context);
+            }
+            return Future.value(false);
+          },
         ),
       ),
     );
   }
 
-  Future<bool> onBackPress() {
-    if (show) {
-      setState(() {
-        show = false;
-      });
-    } else {
-      Navigator.pop(context);
-    }
-
-    return Future.value(false);
-  }
-
-  Widget bottomsheet() {
+  Widget emojiSelect() {
     return EmojiPicker(
-      rows: 4,
-      columns: 7,
-      onEmojiSelected: (emoji, category) {
-        setState(() {
-          textEditingController.text += emoji.emoji;
+        rows: 4,
+        columns: 7,
+        onEmojiSelected: (emoji, category) {
+          print(emoji);
+          setState(() {
+            _controller.text = _controller.text + emoji.emoji;
+          });
         });
-        print(emoji);
-      },
-    );
   }
 }
