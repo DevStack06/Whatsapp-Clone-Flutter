@@ -163,11 +163,15 @@ class _IndividualPageState extends State<IndividualPage> {
                                 hintStyle: TextStyle(color: Colors.grey),
                                 prefixIcon: IconButton(
                                   icon: Icon(
-                                    Icons.emoji_emotions_outlined,
+                                    show
+                                        ? Icons.keyboard
+                                        : Icons.emoji_emotions_outlined,
                                   ),
                                   onPressed: () {
-                                    focusNode.unfocus();
-                                    focusNode.canRequestFocus = false;
+                                    if (!show) {
+                                      focusNode.unfocus();
+                                      focusNode.canRequestFocus = false;
+                                    }
                                     setState(() {
                                       show = !show;
                                     });
@@ -178,14 +182,20 @@ class _IndividualPageState extends State<IndividualPage> {
                                   children: [
                                     IconButton(
                                       icon: Icon(Icons.attach_file),
+                                      onPressed: () {
+                                        focusNode.unfocus();
+                                        focusNode.canRequestFocus = false;
+                                        showModalBottomSheet(
+                                          backgroundColor: Colors.transparent,
+                                          context: context,
+                                          builder: ((builder) => bottomSheet()),
+                                        );
+                                      },
+                                    ),
+                                    IconButton(
+                                      icon: Icon(Icons.camera_alt),
                                       onPressed: () {},
                                     ),
-                                    _controller.text.length > 0
-                                        ? Container()
-                                        : IconButton(
-                                            icon: Icon(Icons.camera_alt),
-                                            onPressed: () {},
-                                          ),
                                   ],
                                 ),
                                 contentPadding: EdgeInsets.all(5),
@@ -204,9 +214,7 @@ class _IndividualPageState extends State<IndividualPage> {
                             backgroundColor: Color(0xFF128C7E),
                             child: IconButton(
                               icon: Icon(
-                                _controller.text.length > 0
-                                    ? Icons.send
-                                    : Icons.mic,
+                                Icons.mic,
                                 color: Colors.white,
                               ),
                               onPressed: () {},
@@ -246,5 +254,80 @@ class _IndividualPageState extends State<IndividualPage> {
             _controller.text = _controller.text + emoji.emoji;
           });
         });
+  }
+
+  Widget bottomSheet() {
+    return Container(
+      height: 320,
+      width: MediaQuery.of(context).size.width,
+      // decoration: BoxDecoration(
+      //     color: Colors.white, borderRadius: BorderRadius.circular(10)),
+      child: Card(
+        margin: const EdgeInsets.all(13.0),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  iconCreation(),
+                  SizedBox(
+                    width: 40,
+                  ),
+                  iconCreation(),
+                  SizedBox(
+                    width: 40,
+                  ),
+                  iconCreation(),
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  iconCreation(),
+                  SizedBox(
+                    width: 40,
+                  ),
+                  iconCreation(),
+                  SizedBox(
+                    width: 40,
+                  ),
+                  iconCreation(),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget iconCreation() {
+    return InkWell(
+      onTap: () {},
+      child: Column(
+        children: [
+          CircleAvatar(
+            radius: 28,
+            backgroundColor: Colors.redAccent,
+            child: Icon(
+              Icons.camera_alt,
+              // semanticLabel: "Help",
+              size: 25,
+              color: Colors.white,
+            ),
+          ),
+          SizedBox(
+            height: 2,
+          ),
+          Text("Help")
+        ],
+      ),
+    );
   }
 }
