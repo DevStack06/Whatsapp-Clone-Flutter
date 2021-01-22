@@ -258,46 +258,47 @@ class _IndividualPageState extends State<IndividualPage> {
 
   Widget bottomSheet() {
     return Container(
-      height: 320,
+      height: 278,
       width: MediaQuery.of(context).size.width,
       // decoration: BoxDecoration(
       //     color: Colors.white, borderRadius: BorderRadius.circular(10)),
       child: Card(
-        margin: const EdgeInsets.all(13.0),
+        margin: const EdgeInsets.all(18.0),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
           child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  iconCreation(),
+                  iconCreation(
+                      Icons.insert_drive_file, Colors.indigo, "Document"),
                   SizedBox(
                     width: 40,
                   ),
-                  iconCreation(),
+                  iconCreation(Icons.camera_alt, Colors.pink, "Camera"),
                   SizedBox(
                     width: 40,
                   ),
-                  iconCreation(),
+                  iconCreation(Icons.insert_photo, Colors.purple, "Gallery"),
                 ],
               ),
               SizedBox(
-                height: 20,
+                height: 30,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  iconCreation(),
+                  iconCreation(Icons.headset, Colors.orange, "Audio"),
                   SizedBox(
                     width: 40,
                   ),
-                  iconCreation(),
+                  iconCreation(Icons.location_pin, Colors.teal, "Location"),
                   SizedBox(
                     width: 40,
                   ),
-                  iconCreation(),
+                  iconCreation(Icons.person, Colors.blue, "Contact"),
                 ],
               ),
             ],
@@ -307,25 +308,31 @@ class _IndividualPageState extends State<IndividualPage> {
     );
   }
 
-  Widget iconCreation() {
+  Widget iconCreation(IconData icons, Color color, String text) {
     return InkWell(
       onTap: () {},
       child: Column(
         children: [
           CircleAvatar(
-            radius: 28,
-            backgroundColor: Colors.redAccent,
+            radius: 30,
+            backgroundColor: color,
             child: Icon(
-              Icons.camera_alt,
+              icons,
               // semanticLabel: "Help",
-              size: 25,
+              size: 29,
               color: Colors.white,
             ),
           ),
           SizedBox(
-            height: 2,
+            height: 5,
           ),
-          Text("Help")
+          Text(
+            text,
+            style: TextStyle(
+              fontSize: 12,
+              // fontWeight: FontWeight.w100,
+            ),
+          )
         ],
       ),
     );
