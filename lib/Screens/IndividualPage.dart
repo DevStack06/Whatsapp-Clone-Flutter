@@ -183,13 +183,11 @@ class _IndividualPageState extends State<IndividualPage> {
                                     IconButton(
                                       icon: Icon(Icons.attach_file),
                                       onPressed: () {
-                                        focusNode.unfocus();
-                                        focusNode.canRequestFocus = false;
                                         showModalBottomSheet(
-                                          backgroundColor: Colors.transparent,
-                                          context: context,
-                                          builder: ((builder) => bottomSheet()),
-                                        );
+                                            backgroundColor: Colors.transparent,
+                                            context: context,
+                                            builder: (builder) =>
+                                                bottomSheet());
                                       },
                                     ),
                                     IconButton(
@@ -244,24 +242,10 @@ class _IndividualPageState extends State<IndividualPage> {
     );
   }
 
-  Widget emojiSelect() {
-    return EmojiPicker(
-        rows: 4,
-        columns: 7,
-        onEmojiSelected: (emoji, category) {
-          print(emoji);
-          setState(() {
-            _controller.text = _controller.text + emoji.emoji;
-          });
-        });
-  }
-
   Widget bottomSheet() {
     return Container(
       height: 278,
       width: MediaQuery.of(context).size.width,
-      // decoration: BoxDecoration(
-      //     color: Colors.white, borderRadius: BorderRadius.circular(10)),
       child: Card(
         margin: const EdgeInsets.all(18.0),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -336,5 +320,17 @@ class _IndividualPageState extends State<IndividualPage> {
         ],
       ),
     );
+  }
+
+  Widget emojiSelect() {
+    return EmojiPicker(
+        rows: 4,
+        columns: 7,
+        onEmojiSelected: (emoji, category) {
+          print(emoji);
+          setState(() {
+            _controller.text = _controller.text + emoji.emoji;
+          });
+        });
   }
 }
