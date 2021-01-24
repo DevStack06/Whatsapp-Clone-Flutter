@@ -1,3 +1,5 @@
+// import 'package:camera/camera.dart';
+// import 'package:chatapp/CustomUI/CameraUI.dart';
 import 'package:chatapp/Model/ChatModel.dart';
 import 'package:emoji_picker/emoji_picker.dart';
 import 'package:flutter/material.dart';
@@ -14,11 +16,14 @@ class IndividualPage extends StatefulWidget {
 class _IndividualPageState extends State<IndividualPage> {
   bool show = false;
   FocusNode focusNode = FocusNode();
+// List<CameraDescription> cameras;
+
   TextEditingController _controller = TextEditingController();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    // cameras = await availableCameras();
+
     focusNode.addListener(() {
       if (focusNode.hasFocus) {
         setState(() {
@@ -192,7 +197,13 @@ class _IndividualPageState extends State<IndividualPage> {
                                     ),
                                     IconButton(
                                       icon: Icon(Icons.camera_alt),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        // Navigator.push(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //         builder: (builder) =>
+                                        //             CameraApp()));
+                                      },
                                     ),
                                   ],
                                 ),
@@ -248,7 +259,7 @@ class _IndividualPageState extends State<IndividualPage> {
       width: MediaQuery.of(context).size.width,
       child: Card(
         margin: const EdgeInsets.all(18.0),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
           child: Column(
