@@ -1,12 +1,12 @@
 import 'package:chatapp/Model/ChatModel.dart';
-import 'package:chatapp/Screens/IndividualPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ButtonCard extends StatelessWidget {
-  const ButtonCard({Key key, this.icon, this.name}) : super(key: key);
-  final IconData icon;
+  const ButtonCard({Key key, this.name, this.icon}) : super(key: key);
   final String name;
+  final IconData icon;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -16,15 +16,15 @@ class ButtonCard extends StatelessWidget {
           radius: 23,
           child: Icon(
             icon,
-            color: Colors.white,
             size: 26,
+            color: Colors.white,
           ),
           backgroundColor: Color(0xFF25D366),
         ),
         title: Text(
           name,
           style: TextStyle(
-            fontSize: 16,
+            fontSize: 15,
             fontWeight: FontWeight.bold,
           ),
         ),
