@@ -84,7 +84,10 @@ class _ChatPageState extends State<ChatPage> {
           Navigator.push(context,
               MaterialPageRoute(builder: (builder) => SelectContact()));
         },
-        child: Icon(Icons.chat),
+        child: Icon(
+          Icons.chat,
+          color: Colors.white,
+        ),
       ),
       body: ListView.builder(
         itemCount: chats.length,
