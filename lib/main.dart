@@ -1,8 +1,13 @@
+import 'package:camera/camera.dart';
 import 'package:chatapp/Screens/Homescreen.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+import 'Pages/CameraPage.dart';
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  cameras = await availableCameras();
+
   runApp(MyApp());
 }
 
