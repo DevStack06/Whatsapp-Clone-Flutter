@@ -16,25 +16,25 @@ class CameraView extends StatelessWidget {
           IconButton(
               icon: Icon(
                 Icons.crop_rotate,
-                size: 28,
+                size: 27,
               ),
               onPressed: () {}),
           IconButton(
               icon: Icon(
                 Icons.emoji_emotions_outlined,
-                size: 28,
+                size: 27,
               ),
               onPressed: () {}),
           IconButton(
               icon: Icon(
                 Icons.title,
-                size: 28,
+                size: 27,
               ),
               onPressed: () {}),
           IconButton(
               icon: Icon(
-                Icons.edit,
-                size: 28,
+                Icons.edit_outlined,
+                size: 27,
               ),
               onPressed: () {}),
         ],
@@ -56,6 +56,7 @@ class CameraView extends StatelessWidget {
               bottom: 0,
               child: Container(
                 // height: 60,
+                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
                 color: Colors.black38,
                 width: MediaQuery.of(context).size.width,
                 child: TextFormField(
@@ -79,12 +80,12 @@ class CameraView extends StatelessWidget {
                       color: Colors.white,
                     ),
                     suffixIcon: CircleAvatar(
-                      backgroundColor: Color(0xFF075E54),
+                      backgroundColor: Color(0xFF128C7E),
                       radius: 26,
                       child: Icon(
                         Icons.check,
                         color: Colors.white,
-                        size: 27,
+                        size: 25,
                       ),
                     ),
                   ),
