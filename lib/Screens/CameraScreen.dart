@@ -1,5 +1,8 @@
 import 'package:camera/camera.dart';
+import 'package:chatapp/Screens/CameraViewScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 
 List<CameraDescription> cameras;
 
@@ -59,7 +62,9 @@ class _CameraScreenState extends State<CameraScreen> {
                           ),
                           onPressed: () {}),
                       InkWell(
-                        onTap: () {},
+                        onTap: () async {
+                          takePhoto(context);
+                        },
                         child: Icon(
                           Icons.panorama_fish_eye,
                           color: Colors.white,
@@ -92,5 +97,22 @@ class _CameraScreenState extends State<CameraScreen> {
         ],
       ),
     );
+  }
+
+  Future<String> takePhoto(BuildContext context) async {
+    final path = join(
+      (await getTemporaryDirectory()).path,
+      '${DateTime.now()}.png',
+    );
+    await _cameraController.takePicture(path);
+    print("path is here $path");
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (builder) => CameraView(
+                  imagePath: path,
+                )));
+
+    return path;
   }
 }
