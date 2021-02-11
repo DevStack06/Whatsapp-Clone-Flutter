@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-class CameraView extends StatelessWidget {
-  const CameraView({Key key, this.imagePath}) : super(key: key);
-  final String imagePath;
+class CameraViewPage extends StatelessWidget {
+  const CameraViewPage({Key key, this.path}) : super(key: key);
+  final String path;
 
   @override
   Widget build(BuildContext context) {
@@ -33,62 +33,59 @@ class CameraView extends StatelessWidget {
               onPressed: () {}),
           IconButton(
               icon: Icon(
-                Icons.edit_outlined,
+                Icons.edit,
                 size: 27,
               ),
               onPressed: () {}),
         ],
       ),
       body: Container(
-        height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         child: Stack(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height - 150,
               width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height - 150,
               child: Image.file(
-                File(imagePath),
+                File(path),
                 fit: BoxFit.cover,
               ),
             ),
             Positioned(
               bottom: 0,
               child: Container(
-                // height: 60,
-                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
                 color: Colors.black38,
                 width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
                 child: TextFormField(
-                  showCursor: true,
-                  maxLines: 6,
-                  minLines: 1,
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 18,
+                    fontSize: 17,
                   ),
+                  maxLines: 6,
+                  minLines: 1,
                   decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "Add a caption...",
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 17,
-                    ),
-                    prefixIcon: Icon(
-                      Icons.add_photo_alternate,
-                      size: 28,
-                      color: Colors.white,
-                    ),
-                    suffixIcon: CircleAvatar(
-                      backgroundColor: Color(0xFF128C7E),
-                      radius: 26,
-                      child: Icon(
-                        Icons.check,
+                      border: InputBorder.none,
+                      hintText: "Add Caption....",
+                      prefixIcon: Icon(
+                        Icons.add_photo_alternate,
                         color: Colors.white,
-                        size: 25,
+                        size: 27,
                       ),
-                    ),
-                  ),
+                      hintStyle: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                      ),
+                      suffixIcon: CircleAvatar(
+                        radius: 27,
+                        backgroundColor: Colors.tealAccent[700],
+                        child: Icon(
+                          Icons.check,
+                          color: Colors.white,
+                          size: 27,
+                        ),
+                      )),
                 ),
               ),
             ),

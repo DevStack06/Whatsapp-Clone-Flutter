@@ -1,5 +1,5 @@
 import 'package:camera/camera.dart';
-import 'package:chatapp/Screens/CameraViewScreen.dart';
+import 'package:chatapp/Screens/CameraView.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -24,6 +24,13 @@ class _CameraScreenState extends State<CameraScreen> {
     super.initState();
     _cameraController = CameraController(cameras[0], ResolutionPreset.high);
     cameraValue = _cameraController.initialize();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _cameraController.dispose();
   }
 
   @override
@@ -62,7 +69,7 @@ class _CameraScreenState extends State<CameraScreen> {
                           ),
                           onPressed: () {}),
                       InkWell(
-                        onTap: () async {
+                        onTap: () {
                           takePhoto(context);
                         },
                         child: Icon(
@@ -99,20 +106,15 @@ class _CameraScreenState extends State<CameraScreen> {
     );
   }
 
-  Future<String> takePhoto(BuildContext context) async {
-    final path = join(
-      (await getTemporaryDirectory()).path,
-      '${DateTime.now()}.png',
-    );
+  void takePhoto(BuildContext context) async {
+    final path =
+        join((await getTemporaryDirectory()).path, "${DateTime.now()}.png");
     await _cameraController.takePicture(path);
-    print("path is here $path");
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (builder) => CameraView(
-                  imagePath: path,
+            builder: (builder) => CameraViewPage(
+                  path: path,
                 )));
-
-    return path;
   }
 }
