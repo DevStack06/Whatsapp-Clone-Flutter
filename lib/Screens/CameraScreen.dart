@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'VideoView.dart';
+
 List<CameraDescription> cameras;
 
 class CameraScreen extends StatefulWidget {
@@ -17,10 +19,11 @@ class _CameraScreenState extends State<CameraScreen> {
   CameraController _cameraController;
 
   Future<void> cameraValue;
+  String videoPath = "";
+  bool icon = false;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _cameraController = CameraController(cameras[0], ResolutionPreset.high);
     cameraValue = _cameraController.initialize();
@@ -28,7 +31,6 @@ class _CameraScreenState extends State<CameraScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _cameraController.dispose();
   }
@@ -68,15 +70,42 @@ class _CameraScreenState extends State<CameraScreen> {
                             size: 28,
                           ),
                           onPressed: () {}),
-                      InkWell(
+                      GestureDetector(
                         onTap: () {
-                          takePhoto(context);
+                          if (!_cameraController.value.isRecordingVideo) {
+                            takePhoto(context);
+                          }
                         },
-                        child: Icon(
-                          Icons.panorama_fish_eye,
-                          color: Colors.white,
-                          size: 70,
-                        ),
+                        onLongPress: () async {
+                          String path = await recordVideo();
+                          setState(() {
+                            videoPath = path;
+                            icon = true;
+                          });
+                        },
+                        onLongPressUp: () async {
+                          await _cameraController.stopVideoRecording();
+                          setState(() {
+                            icon = false;
+                          });
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (builder) => VideoViewPage(
+                                        path: videoPath,
+                                      )));
+                        },
+                        child: icon
+                            ? Icon(
+                                Icons.radio_button_on,
+                                color: Colors.red,
+                                size: 80,
+                              )
+                            : Icon(
+                                Icons.panorama_fish_eye,
+                                color: Colors.white,
+                                size: 70,
+                              ),
                       ),
                       IconButton(
                           icon: Icon(
@@ -116,5 +145,12 @@ class _CameraScreenState extends State<CameraScreen> {
             builder: (builder) => CameraViewPage(
                   path: path,
                 )));
+  }
+
+  Future<String> recordVideo() async {
+    final path =
+        join((await getTemporaryDirectory()).path, "${DateTime.now()}.png");
+    await _cameraController.startVideoRecording(path);
+    return path;
   }
 }
