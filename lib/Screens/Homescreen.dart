@@ -14,7 +14,6 @@ class _HomescreenState extends State<Homescreen>
   TabController _controller;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _controller = TabController(length: 4, vsync: this, initialIndex: 1);
   }
