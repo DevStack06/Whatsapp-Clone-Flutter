@@ -13,6 +13,8 @@ class VideoViewPage extends StatefulWidget {
 
 class _VideoViewPageState extends State<VideoViewPage> {
   VideoPlayerController _controller;
+
+  @override
   void initState() {
     super.initState();
     _controller = VideoPlayerController.file(File(widget.path))
@@ -20,13 +22,6 @@ class _VideoViewPageState extends State<VideoViewPage> {
         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
         setState(() {});
       });
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    _controller.dispose();
   }
 
   @override
@@ -125,8 +120,8 @@ class _VideoViewPageState extends State<VideoViewPage> {
                   });
                 },
                 child: CircleAvatar(
-                  backgroundColor: Colors.black38,
                   radius: 33,
+                  backgroundColor: Colors.black38,
                   child: Icon(
                     _controller.value.isPlaying
                         ? Icons.pause
