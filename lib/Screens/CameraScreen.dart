@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:camera/camera.dart';
 import 'package:chatapp/Screens/CameraView.dart';
 import 'package:chatapp/Screens/VideoView.dart';
@@ -22,6 +24,8 @@ class _CameraScreenState extends State<CameraScreen> {
   XFile imageFile;
   XFile videoFile;
   bool flash = false;
+  bool flip = false;
+  double transform = 0;
 
   @override
   void initState() {
@@ -125,13 +129,26 @@ class _CameraScreenState extends State<CameraScreen> {
                                 ),
                         ),
                         IconButton(
-                            icon: Icon(
-                              Icons.flip_camera_ios,
-                              color: Colors.white,
-                              size: 28,
+                            icon: Transform.rotate(
+                              angle: transform,
+                              child: Icon(
+                                Icons.flip_camera_ios,
+                                color: Colors.white,
+                                size: 28,
+                              ),
                             ),
                             onPressed: () async {
                               //  await  _cameraController.
+                              int camerapos = flip ? 1 : 0;
+                              _cameraController = CameraController(
+                                  cameras[camerapos], ResolutionPreset.high);
+                              cameraValue = _cameraController.initialize();
+                              setState(() {
+                                // var t = _cameraController.;
+                                // print(t);
+                                flip = !flip;
+                                transform = transform + 1 * pi;
+                              });
                             }),
                       ],
                     ),
