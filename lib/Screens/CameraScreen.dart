@@ -139,7 +139,7 @@ class _CameraScreenState extends State<CameraScreen> {
                             ),
                             onPressed: () async {
                               //  await  _cameraController.
-                              int camerapos = flip ? 1 : 0;
+                              int camerapos = flip ? 0 : 1;
                               _cameraController = CameraController(
                                   cameras[camerapos], ResolutionPreset.high);
                               cameraValue = _cameraController.initialize();
