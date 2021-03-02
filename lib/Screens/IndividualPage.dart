@@ -1,5 +1,7 @@
 // import 'package:camera/camera.dart';
 // import 'package:chatapp/CustomUI/CameraUI.dart';
+import 'package:chatapp/CustomUI/OtherReply.dart';
+import 'package:chatapp/CustomUI/OwnMessagse.dart';
 import 'package:chatapp/Model/ChatModel.dart';
 import 'package:emoji_picker/emoji_picker.dart';
 import 'package:flutter/material.dart';
@@ -35,221 +37,260 @@ class _IndividualPageState extends State<IndividualPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.blueGrey,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60),
-        child: AppBar(
-          leadingWidth: 70,
-          titleSpacing: 0,
-          leading: InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.arrow_back,
-                  size: 24,
+    return Stack(
+      children: [
+        Image.asset(
+          "assets/whatsapp_Back.png",
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          fit: BoxFit.cover,
+        ),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(60),
+            child: AppBar(
+              leadingWidth: 70,
+              titleSpacing: 0,
+              leading: InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.arrow_back,
+                      size: 24,
+                    ),
+                    CircleAvatar(
+                      child: SvgPicture.asset(
+                        widget.chatModel.isGroup
+                            ? "assets/groups.svg"
+                            : "assets/person.svg",
+                        color: Colors.white,
+                        height: 36,
+                        width: 36,
+                      ),
+                      radius: 20,
+                      backgroundColor: Colors.blueGrey,
+                    ),
+                  ],
                 ),
-                CircleAvatar(
-                  child: SvgPicture.asset(
-                    widget.chatModel.isGroup
-                        ? "assets/groups.svg"
-                        : "assets/person.svg",
-                    color: Colors.white,
-                    height: 36,
-                    width: 36,
+              ),
+              title: InkWell(
+                onTap: () {},
+                child: Container(
+                  margin: EdgeInsets.all(6),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.chatModel.name,
+                        style: TextStyle(
+                          fontSize: 18.5,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        "last seen today at 12:05",
+                        style: TextStyle(
+                          fontSize: 13,
+                        ),
+                      )
+                    ],
                   ),
-                  radius: 20,
-                  backgroundColor: Colors.blueGrey,
+                ),
+              ),
+              actions: [
+                IconButton(icon: Icon(Icons.videocam), onPressed: () {}),
+                IconButton(icon: Icon(Icons.call), onPressed: () {}),
+                PopupMenuButton<String>(
+                  padding: EdgeInsets.all(0),
+                  onSelected: (value) {
+                    print(value);
+                  },
+                  itemBuilder: (BuildContext contesxt) {
+                    return [
+                      PopupMenuItem(
+                        child: Text("View Contact"),
+                        value: "View Contact",
+                      ),
+                      PopupMenuItem(
+                        child: Text("Media, links, and docs"),
+                        value: "Media, links, and docs",
+                      ),
+                      PopupMenuItem(
+                        child: Text("Whatsapp Web"),
+                        value: "Whatsapp Web",
+                      ),
+                      PopupMenuItem(
+                        child: Text("Search"),
+                        value: "Search",
+                      ),
+                      PopupMenuItem(
+                        child: Text("Mute Notification"),
+                        value: "Mute Notification",
+                      ),
+                      PopupMenuItem(
+                        child: Text("Wallpaper"),
+                        value: "Wallpaper",
+                      ),
+                    ];
+                  },
                 ),
               ],
             ),
           ),
-          title: InkWell(
-            onTap: () {},
-            child: Container(
-              margin: EdgeInsets.all(6),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+          body: Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: WillPopScope(
+              child: Stack(
                 children: [
-                  Text(
-                    widget.chatModel.name,
-                    style: TextStyle(
-                      fontSize: 18.5,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    "last seen today at 12:05",
-                    style: TextStyle(
-                      fontSize: 13,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-          actions: [
-            IconButton(icon: Icon(Icons.videocam), onPressed: () {}),
-            IconButton(icon: Icon(Icons.call), onPressed: () {}),
-            PopupMenuButton<String>(
-              padding: EdgeInsets.all(0),
-              onSelected: (value) {
-                print(value);
-              },
-              itemBuilder: (BuildContext contesxt) {
-                return [
-                  PopupMenuItem(
-                    child: Text("View Contact"),
-                    value: "View Contact",
-                  ),
-                  PopupMenuItem(
-                    child: Text("Media, links, and docs"),
-                    value: "Media, links, and docs",
-                  ),
-                  PopupMenuItem(
-                    child: Text("Whatsapp Web"),
-                    value: "Whatsapp Web",
-                  ),
-                  PopupMenuItem(
-                    child: Text("Search"),
-                    value: "Search",
-                  ),
-                  PopupMenuItem(
-                    child: Text("Mute Notification"),
-                    value: "Mute Notification",
-                  ),
-                  PopupMenuItem(
-                    child: Text("Wallpaper"),
-                    value: "Wallpaper",
-                  ),
-                ];
-              },
-            ),
-          ],
-        ),
-      ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: WillPopScope(
-          child: Stack(
-            children: [
-              ListView(),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Row(
+                  Container(
+                    height: MediaQuery.of(context).size.height - 140,
+                    child: ListView(
+                      shrinkWrap: true,
                       children: [
+                        OwnMessage(),
+                        OtherReply(),
+                        OwnMessage(),
+                        OtherReply(),
+                        OwnMessage(),
+                        OtherReply(),
+                        OwnMessage(),
+                        OtherReply(),
+                        OtherReply(),
+                        OwnMessage(),
+                        OtherReply(),
+                        OwnMessage(),
+                        OtherReply(),
+                        OwnMessage(),
+                        OtherReply(),
+                        OwnMessage(),
+                        OtherReply(),
                         Container(
-                          width: MediaQuery.of(context).size.width - 60,
-                          child: Card(
-                            margin:
-                                EdgeInsets.only(left: 2, right: 2, bottom: 8),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                            child: TextFormField(
-                              controller: _controller,
-                              focusNode: focusNode,
-                              textAlignVertical: TextAlignVertical.center,
-                              keyboardType: TextInputType.multiline,
-                              maxLines: 5,
-                              minLines: 1,
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Type a message",
-                                hintStyle: TextStyle(color: Colors.grey),
-                                prefixIcon: IconButton(
-                                  icon: Icon(
-                                    show
-                                        ? Icons.keyboard
-                                        : Icons.emoji_emotions_outlined,
-                                  ),
-                                  onPressed: () {
-                                    if (!show) {
-                                      focusNode.unfocus();
-                                      focusNode.canRequestFocus = false;
-                                    }
-                                    setState(() {
-                                      show = !show;
-                                    });
-                                  },
-                                ),
-                                suffixIcon: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    IconButton(
-                                      icon: Icon(Icons.attach_file),
-                                      onPressed: () {
-                                        showModalBottomSheet(
-                                            backgroundColor: Colors.transparent,
-                                            context: context,
-                                            builder: (builder) =>
-                                                bottomSheet());
-                                      },
-                                    ),
-                                    IconButton(
-                                      icon: Icon(Icons.camera_alt),
-                                      onPressed: () {
-                                        // Navigator.push(
-                                        //     context,
-                                        //     MaterialPageRoute(
-                                        //         builder: (builder) =>
-                                        //             CameraApp()));
-                                      },
-                                    ),
-                                  ],
-                                ),
-                                contentPadding: EdgeInsets.all(5),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            bottom: 8,
-                            right: 2,
-                            left: 2,
-                          ),
-                          child: CircleAvatar(
-                            radius: 25,
-                            backgroundColor: Color(0xFF128C7E),
-                            child: IconButton(
-                              icon: Icon(
-                                Icons.mic,
-                                color: Colors.white,
-                              ),
-                              onPressed: () {},
-                            ),
-                          ),
+                          height: 5,
+                          color: Colors.transparent,
                         ),
                       ],
                     ),
-                    show ? emojiSelect() : Container(),
-                  ],
-                ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width - 60,
+                              child: Card(
+                                margin: EdgeInsets.only(
+                                    left: 2, right: 2, bottom: 8),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                child: TextFormField(
+                                  controller: _controller,
+                                  focusNode: focusNode,
+                                  textAlignVertical: TextAlignVertical.center,
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: 5,
+                                  minLines: 1,
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: "Type a message",
+                                    hintStyle: TextStyle(color: Colors.grey),
+                                    prefixIcon: IconButton(
+                                      icon: Icon(
+                                        show
+                                            ? Icons.keyboard
+                                            : Icons.emoji_emotions_outlined,
+                                      ),
+                                      onPressed: () {
+                                        if (!show) {
+                                          focusNode.unfocus();
+                                          focusNode.canRequestFocus = false;
+                                        }
+                                        setState(() {
+                                          show = !show;
+                                        });
+                                      },
+                                    ),
+                                    suffixIcon: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        IconButton(
+                                          icon: Icon(Icons.attach_file),
+                                          onPressed: () {
+                                            showModalBottomSheet(
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                context: context,
+                                                builder: (builder) =>
+                                                    bottomSheet());
+                                          },
+                                        ),
+                                        IconButton(
+                                          icon: Icon(Icons.camera_alt),
+                                          onPressed: () {
+                                            // Navigator.push(
+                                            //     context,
+                                            //     MaterialPageRoute(
+                                            //         builder: (builder) =>
+                                            //             CameraApp()));
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                    contentPadding: EdgeInsets.all(5),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                bottom: 8,
+                                right: 2,
+                                left: 2,
+                              ),
+                              child: CircleAvatar(
+                                radius: 25,
+                                backgroundColor: Color(0xFF128C7E),
+                                child: IconButton(
+                                  icon: Icon(
+                                    Icons.mic,
+                                    color: Colors.white,
+                                  ),
+                                  onPressed: () {},
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        show ? emojiSelect() : Container(),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-            ],
+              onWillPop: () {
+                if (show) {
+                  setState(() {
+                    show = false;
+                  });
+                } else {
+                  Navigator.pop(context);
+                }
+                return Future.value(false);
+              },
+            ),
           ),
-          onWillPop: () {
-            if (show) {
-              setState(() {
-                show = false;
-              });
-            } else {
-              Navigator.pop(context);
-            }
-            return Future.value(false);
-          },
         ),
-      ),
+      ],
     );
   }
 
