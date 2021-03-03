@@ -26,7 +26,7 @@ class OwnMessageCard extends StatelessWidget {
                   bottom: 20,
                 ),
                 child: Text(
-                  "Hey hjdhh jhbdshbd jhbvh jhsb dhbds jhbvh vbsd hjsvhvs jhsvh ",
+                  "Hey My name is Balram rathore and please do subscribe to my channel for flutter and NodeJs related tings ",
                   style: TextStyle(
                     fontSize: 16,
                   ),
