@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class OwnMessage extends StatelessWidget {
-  const OwnMessage({Key key}) : super(key: key);
+class OwnMessageCard extends StatelessWidget {
+  const OwnMessageCard({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,19 +13,23 @@ class OwnMessage extends StatelessWidget {
         ),
         child: Card(
           elevation: 1,
-          color: Color(0xFFdcf8c6),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.0),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          color: Color(0xffdcf8c6),
           margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
           child: Stack(
             children: [
               Padding(
-                padding:
-                    EdgeInsets.only(left: 10, right: 20, top: 5, bottom: 20),
+                padding: const EdgeInsets.only(
+                  left: 10,
+                  right: 60,
+                  top: 5,
+                  bottom: 20,
+                ),
                 child: Text(
-                  "Hey there actually I have one Problem  code  avnt get any idea how to develop a code is very good thing bhad me Jaye vo",
-                  style: TextStyle(fontSize: 16),
+                  "Hey hjdhh jhbdshbd jhbvh jhsb dhbds jhbvh vbsd hjsvhvs jhsvh ",
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
                 ),
               ),
               Positioned(
@@ -34,10 +38,10 @@ class OwnMessage extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      "20:56",
+                      "20:58",
                       style: TextStyle(
-                        color: Colors.grey[600],
                         fontSize: 13,
+                        color: Colors.grey[600],
                       ),
                     ),
                     SizedBox(

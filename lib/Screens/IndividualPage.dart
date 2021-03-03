@@ -1,7 +1,7 @@
 // import 'package:camera/camera.dart';
 // import 'package:chatapp/CustomUI/CameraUI.dart';
-import 'package:chatapp/CustomUI/OtherReply.dart';
-import 'package:chatapp/CustomUI/OwnMessagse.dart';
+import 'package:chatapp/CustomUI/OwnMessgaeCrad.dart';
+import 'package:chatapp/CustomUI/ReplyCard.dart';
 import 'package:chatapp/Model/ChatModel.dart';
 import 'package:emoji_picker/emoji_picker.dart';
 import 'package:flutter/material.dart';
@@ -154,27 +154,22 @@ class _IndividualPageState extends State<IndividualPage> {
                     child: ListView(
                       shrinkWrap: true,
                       children: [
-                        OwnMessage(),
-                        OtherReply(),
-                        OwnMessage(),
-                        OtherReply(),
-                        OwnMessage(),
-                        OtherReply(),
-                        OwnMessage(),
-                        OtherReply(),
-                        OtherReply(),
-                        OwnMessage(),
-                        OtherReply(),
-                        OwnMessage(),
-                        OtherReply(),
-                        OwnMessage(),
-                        OtherReply(),
-                        OwnMessage(),
-                        OtherReply(),
-                        Container(
-                          height: 5,
-                          color: Colors.transparent,
-                        ),
+                        OwnMessageCard(),
+                        ReplyCard(),
+                        OwnMessageCard(),
+                        ReplyCard(),
+                        OwnMessageCard(),
+                        ReplyCard(),
+                        OwnMessageCard(),
+                        ReplyCard(),
+                        OwnMessageCard(),
+                        ReplyCard(),
+                        OwnMessageCard(),
+                        ReplyCard(),
+                        OwnMessageCard(),
+                        ReplyCard(),
+                        OwnMessageCard(),
+                        ReplyCard(),
                       ],
                     ),
                   ),
