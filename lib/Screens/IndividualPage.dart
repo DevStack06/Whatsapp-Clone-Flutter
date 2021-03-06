@@ -3,9 +3,11 @@
 import 'package:chatapp/CustomUI/OwnMessgaeCrad.dart';
 import 'package:chatapp/CustomUI/ReplyCard.dart';
 import 'package:chatapp/Model/ChatModel.dart';
+import 'package:chatapp/Services/SocketIoService.dart';
 import 'package:emoji_picker/emoji_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class IndividualPage extends StatefulWidget {
   IndividualPage({Key key, this.chatModel}) : super(key: key);
@@ -21,10 +23,21 @@ class _IndividualPageState extends State<IndividualPage> {
 // List<CameraDescription> cameras;
 
   TextEditingController _controller = TextEditingController();
+  // SocketIoService socket = SocketIoService();
   @override
   void initState() {
     super.initState();
     // cameras = await availableCameras();
+    // socket.connect("endpoint");
+    print("conneted");
+    IO.Socket socket = IO.io('http://127.0.0.1:5000');
+    socket.onConnect((_) {
+      print('connect');
+      socket.emit('msg', 'test');
+    });
+    socket.on('event', (data) => print(data));
+    socket.onDisconnect((_) => print('disconnect'));
+    socket.on('fromServer', (_) => print(_));
 
     focusNode.addListener(() {
       if (focusNode.hasFocus) {
@@ -150,7 +163,7 @@ class _IndividualPageState extends State<IndividualPage> {
               child: Stack(
                 children: [
                   Container(
-                    height: MediaQuery.of(context).size.height - 140,
+                    height: MediaQuery.of(context).size.height - 160,
                     child: ListView(
                       shrinkWrap: true,
                       children: [

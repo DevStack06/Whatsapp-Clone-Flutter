@@ -21,7 +21,7 @@ class OwnMessageCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(
                   left: 10,
-                  right: 60,
+                  right: 30,
                   top: 5,
                   bottom: 20,
                 ),
