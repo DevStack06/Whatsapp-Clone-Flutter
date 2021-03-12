@@ -3,7 +3,6 @@
 import 'package:chatapp/CustomUI/OwnMessgaeCrad.dart';
 import 'package:chatapp/CustomUI/ReplyCard.dart';
 import 'package:chatapp/Model/ChatModel.dart';
-import 'package:chatapp/Services/SocketIoService.dart';
 import 'package:emoji_picker/emoji_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -20,25 +19,15 @@ class IndividualPage extends StatefulWidget {
 class _IndividualPageState extends State<IndividualPage> {
   bool show = false;
   FocusNode focusNode = FocusNode();
+  bool send = false;
 // List<CameraDescription> cameras;
+  IO.Socket socket;
 
   TextEditingController _controller = TextEditingController();
-  // SocketIoService socket = SocketIoService();
   @override
   void initState() {
     super.initState();
-    // cameras = await availableCameras();
-    // socket.connect("endpoint");
-    print("conneted");
-    IO.Socket socket = IO.io('http://127.0.0.1:5000');
-    socket.onConnect((_) {
-      print('connect');
-      socket.emit('msg', 'test');
-    });
-    socket.on('event', (data) => print(data));
-    socket.onDisconnect((_) => print('disconnect'));
-    socket.on('fromServer', (_) => print(_));
-
+    connectToServer();
     focusNode.addListener(() {
       if (focusNode.hasFocus) {
         setState(() {
@@ -46,6 +35,31 @@ class _IndividualPageState extends State<IndividualPage> {
         });
       }
     });
+  }
+
+  void connectToServer() {
+    try {
+      socket = IO.io('http://192.168.43.92:8090', <String, dynamic>{
+        'transports': ['websocket'],
+        'autoConnect': false,
+      });
+      socket.connect();
+      socket.emit('/test', 'test');
+      socket.onConnect((_) {
+        print('connected');
+        // socket.emit('msg', 'test');
+      });
+      socket.onConnectError((data) => print(data));
+      // socket.on('event', (data) => print(data));
+      // socket.onDisconnect((_) => print('disconnect'));
+      // socket.on('fromServer', (_) => print(_));
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  void emitMessage() {
+    socket.emit('/test', 'hello world');
   }
 
   @override
@@ -163,7 +177,7 @@ class _IndividualPageState extends State<IndividualPage> {
               child: Stack(
                 children: [
                   Container(
-                    height: MediaQuery.of(context).size.height - 160,
+                    height: MediaQuery.of(context).size.height - 150,
                     child: ListView(
                       shrinkWrap: true,
                       children: [
@@ -208,6 +222,17 @@ class _IndividualPageState extends State<IndividualPage> {
                                   keyboardType: TextInputType.multiline,
                                   maxLines: 5,
                                   minLines: 1,
+                                  onChanged: (value) {
+                                    if (value.length > 0) {
+                                      setState(() {
+                                        send = true;
+                                      });
+                                    } else {
+                                      setState(() {
+                                        send = false;
+                                      });
+                                    }
+                                  },
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
                                     hintText: "Type a message",
@@ -269,11 +294,18 @@ class _IndividualPageState extends State<IndividualPage> {
                                 radius: 25,
                                 backgroundColor: Color(0xFF128C7E),
                                 child: IconButton(
-                                  icon: Icon(
-                                    Icons.mic,
-                                    color: Colors.white,
-                                  ),
-                                  onPressed: () {},
+                                  icon: send
+                                      ? Icon(
+                                          Icons.send,
+                                          color: Colors.white,
+                                        )
+                                      : Icon(
+                                          Icons.mic,
+                                          color: Colors.white,
+                                        ),
+                                  onPressed: () {
+                                    emitMessage();
+                                  },
                                 ),
                               ),
                             ),
