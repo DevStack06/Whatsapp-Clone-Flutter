@@ -19,15 +19,14 @@ class IndividualPage extends StatefulWidget {
 class _IndividualPageState extends State<IndividualPage> {
   bool show = false;
   FocusNode focusNode = FocusNode();
-  bool send = false;
-// List<CameraDescription> cameras;
   IO.Socket socket;
+  bool sendButton = false;
 
   TextEditingController _controller = TextEditingController();
   @override
   void initState() {
     super.initState();
-    connectToServer();
+    connect();
     focusNode.addListener(() {
       if (focusNode.hasFocus) {
         setState(() {
@@ -37,29 +36,15 @@ class _IndividualPageState extends State<IndividualPage> {
     });
   }
 
-  void connectToServer() {
-    try {
-      socket = IO.io('http://192.168.43.92:8090', <String, dynamic>{
-        'transports': ['websocket'],
-        'autoConnect': false,
-      });
-      socket.connect();
-      socket.emit('/test', 'test');
-      socket.onConnect((_) {
-        print('connected');
-        // socket.emit('msg', 'test');
-      });
-      socket.onConnectError((data) => print(data));
-      // socket.on('event', (data) => print(data));
-      // socket.onDisconnect((_) => print('disconnect'));
-      // socket.on('fromServer', (_) => print(_));
-    } catch (e) {
-      print(e.toString());
-    }
-  }
-
-  void emitMessage() {
-    socket.emit('/test', 'hello world');
+  void connect() {
+    socket = IO.io("http://192.168.43.92:5000", <String, dynamic>{
+      "transports": ["websocket"],
+      "autoConnect": false,
+    });
+    socket.connect();
+    socket.emit("/test", "Hello world");
+    socket.onConnect((data) => print("Connected"));
+    print(socket.connected);
   }
 
   @override
@@ -225,11 +210,11 @@ class _IndividualPageState extends State<IndividualPage> {
                                   onChanged: (value) {
                                     if (value.length > 0) {
                                       setState(() {
-                                        send = true;
+                                        sendButton = true;
                                       });
                                     } else {
                                       setState(() {
-                                        send = false;
+                                        sendButton = false;
                                       });
                                     }
                                   },
@@ -294,7 +279,7 @@ class _IndividualPageState extends State<IndividualPage> {
                                 radius: 25,
                                 backgroundColor: Color(0xFF128C7E),
                                 child: IconButton(
-                                  icon: send
+                                  icon: sendButton
                                       ? Icon(
                                           Icons.send,
                                           color: Colors.white,
@@ -303,9 +288,7 @@ class _IndividualPageState extends State<IndividualPage> {
                                           Icons.mic,
                                           color: Colors.white,
                                         ),
-                                  onPressed: () {
-                                    emitMessage();
-                                  },
+                                  onPressed: () {},
                                 ),
                               ),
                             ),
