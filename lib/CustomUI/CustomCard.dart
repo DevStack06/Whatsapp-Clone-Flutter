@@ -3,13 +3,23 @@ import 'package:chatapp/Model/MessgeModel.dart';
 import 'package:chatapp/Screens/IndividualPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class CustomCard extends StatelessWidget {
-  const CustomCard({Key key, this.chatModel, this.data, this.sendMessage})
+  const CustomCard(
+      {Key key,
+      this.chatModel,
+      this.data,
+      this.sendMessage,
+      this.sourceChat,
+      this.socket})
       : super(key: key);
   final ChatModel chatModel;
   final List<MessageModel> data;
   final Function sendMessage;
+  final ChatModel sourceChat;
+  final IO.Socket socket;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -21,6 +31,8 @@ class CustomCard extends StatelessWidget {
                       chatModel: chatModel,
                       data: data,
                       sendMessage: sendMessage,
+                      sourceChat: sourceChat,
+                      socket: socket,
                     )));
       },
       child: Column(

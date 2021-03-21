@@ -7,13 +7,22 @@ import 'package:chatapp/Model/MessgeModel.dart';
 import 'package:emoji_picker/emoji_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class IndividualPage extends StatefulWidget {
-  IndividualPage({Key key, this.chatModel, this.data, this.sendMessage})
+  IndividualPage(
+      {Key key,
+      this.chatModel,
+      this.data,
+      this.sendMessage,
+      this.sourceChat,
+      this.socket})
       : super(key: key);
   final ChatModel chatModel;
   final List<MessageModel> data;
   final Function sendMessage;
+  final ChatModel sourceChat;
+  final IO.Socket socket;
 
   @override
   _IndividualPageState createState() => _IndividualPageState();
@@ -23,17 +32,60 @@ class _IndividualPageState extends State<IndividualPage> {
   bool show = false;
   FocusNode focusNode = FocusNode();
   bool sendButton = false;
+  List<MessageModel> messegse = [];
+  IO.Socket socket;
 
   TextEditingController _controller = TextEditingController();
   @override
   void initState() {
     super.initState();
+    // connect();
+
     focusNode.addListener(() {
       if (focusNode.hasFocus) {
         setState(() {
           show = false;
         });
       }
+    });
+    connect();
+  }
+
+  void connect() {
+    // MessageModel messageModel = MessageModel(sourceId: widget.sourceChat.id.toString(),targetId: );
+    socket = IO.io("http://192.168.43.92:5000", <String, dynamic>{
+      "transports": ["websocket"],
+      "autoConnect": false,
+    });
+    socket.connect();
+    socket.emit("/test", {"id": widget.sourceChat.id});
+    socket.onConnect((data) {
+      print("Connected");
+      socket.on("message", (e) {
+        print(e['message']);
+        setMessage("destination", e["message"], e["sourceId"]);
+      });
+    });
+  }
+
+  void setMessage(String type, String message, int id) {
+    MessageModel messageModel = MessageModel(type: type, message: message);
+
+    setState(() {
+      messegse.add(messageModel);
+    });
+    // print(messages[id].length);
+    // print(id);
+  }
+
+  void sendMessage(int targetId, String message) {
+    setMessage("source", message, targetId);
+    // MessageModel messageModel = MessageModel(type: "source", message: message);
+
+    socket.emit("message", {
+      "sourceId": widget.sourceChat.id,
+      "targetId": targetId,
+      "message": message
     });
   }
 
@@ -155,15 +207,15 @@ class _IndividualPageState extends State<IndividualPage> {
                     height: MediaQuery.of(context).size.height - 150,
                     child: ListView.builder(
                       shrinkWrap: true,
-                      itemCount: widget.data.length,
+                      itemCount: messegse.length,
                       itemBuilder: (context, index) {
-                        if (widget.data[index].type == "source") {
+                        if (messegse[index].type == "source") {
                           return OwnMessageCard(
-                            message: widget.data[index].message,
+                            message: messegse[index].message,
                           );
                         } else {
                           return ReplyCard(
-                            message: widget.data[index].message,
+                            message: messegse[index].message,
                           );
                         }
                       },
@@ -273,9 +325,10 @@ class _IndividualPageState extends State<IndividualPage> {
                                           color: Colors.white,
                                         ),
                                   onPressed: () {
-                                    widget.sendMessage(
-                                        widget.chatModel.id, "hey there");
-                                    setState(() {});
+                                    sendMessage(
+                                        widget.chatModel.id, _controller.text);
+                                    // setState(() {});
+                                    _controller.clear();
                                   },
                                 ),
                               ),
