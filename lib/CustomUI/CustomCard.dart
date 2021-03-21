@@ -1,12 +1,15 @@
 import 'package:chatapp/Model/ChatModel.dart';
+import 'package:chatapp/Model/MessgeModel.dart';
 import 'package:chatapp/Screens/IndividualPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomCard extends StatelessWidget {
-  const CustomCard({Key key, this.chatModel}) : super(key: key);
+  const CustomCard({Key key, this.chatModel, this.data, this.sendMessage})
+      : super(key: key);
   final ChatModel chatModel;
-
+  final List<MessageModel> data;
+  final Function sendMessage;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -16,6 +19,8 @@ class CustomCard extends StatelessWidget {
             MaterialPageRoute(
                 builder: (contex) => IndividualPage(
                       chatModel: chatModel,
+                      data: data,
+                      sendMessage: sendMessage,
                     )));
       },
       child: Column(

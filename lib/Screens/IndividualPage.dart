@@ -3,14 +3,17 @@
 import 'package:chatapp/CustomUI/OwnMessgaeCrad.dart';
 import 'package:chatapp/CustomUI/ReplyCard.dart';
 import 'package:chatapp/Model/ChatModel.dart';
+import 'package:chatapp/Model/MessgeModel.dart';
 import 'package:emoji_picker/emoji_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class IndividualPage extends StatefulWidget {
-  IndividualPage({Key key, this.chatModel}) : super(key: key);
+  IndividualPage({Key key, this.chatModel, this.data, this.sendMessage})
+      : super(key: key);
   final ChatModel chatModel;
+  final List<MessageModel> data;
+  final Function sendMessage;
 
   @override
   _IndividualPageState createState() => _IndividualPageState();
@@ -19,14 +22,12 @@ class IndividualPage extends StatefulWidget {
 class _IndividualPageState extends State<IndividualPage> {
   bool show = false;
   FocusNode focusNode = FocusNode();
-  IO.Socket socket;
   bool sendButton = false;
 
   TextEditingController _controller = TextEditingController();
   @override
   void initState() {
     super.initState();
-    connect();
     focusNode.addListener(() {
       if (focusNode.hasFocus) {
         setState(() {
@@ -34,17 +35,6 @@ class _IndividualPageState extends State<IndividualPage> {
         });
       }
     });
-  }
-
-  void connect() {
-    socket = IO.io("http://192.168.43.92:5000", <String, dynamic>{
-      "transports": ["websocket"],
-      "autoConnect": false,
-    });
-    socket.connect();
-    socket.emit("/test", "Hello world");
-    socket.onConnect((data) => print("Connected"));
-    print(socket.connected);
   }
 
   @override
@@ -163,26 +153,20 @@ class _IndividualPageState extends State<IndividualPage> {
                 children: [
                   Container(
                     height: MediaQuery.of(context).size.height - 150,
-                    child: ListView(
+                    child: ListView.builder(
                       shrinkWrap: true,
-                      children: [
-                        OwnMessageCard(),
-                        ReplyCard(),
-                        OwnMessageCard(),
-                        ReplyCard(),
-                        OwnMessageCard(),
-                        ReplyCard(),
-                        OwnMessageCard(),
-                        ReplyCard(),
-                        OwnMessageCard(),
-                        ReplyCard(),
-                        OwnMessageCard(),
-                        ReplyCard(),
-                        OwnMessageCard(),
-                        ReplyCard(),
-                        OwnMessageCard(),
-                        ReplyCard(),
-                      ],
+                      itemCount: widget.data.length,
+                      itemBuilder: (context, index) {
+                        if (widget.data[index].type == "source") {
+                          return OwnMessageCard(
+                            message: widget.data[index].message,
+                          );
+                        } else {
+                          return ReplyCard(
+                            message: widget.data[index].message,
+                          );
+                        }
+                      },
                     ),
                   ),
                   Align(
@@ -288,7 +272,11 @@ class _IndividualPageState extends State<IndividualPage> {
                                           Icons.mic,
                                           color: Colors.white,
                                         ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    widget.sendMessage(
+                                        widget.chatModel.id, "hey there");
+                                    setState(() {});
+                                  },
                                 ),
                               ),
                             ),

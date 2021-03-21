@@ -35,6 +35,7 @@ dependencies:
   path:
   video_player: ^1.0.1
   socket_io_client: ^0.9.12
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
