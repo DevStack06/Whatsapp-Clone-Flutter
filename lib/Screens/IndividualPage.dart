@@ -9,8 +9,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class IndividualPage extends StatefulWidget {
-  IndividualPage({Key key, this.chatModel}) : super(key: key);
+  IndividualPage({Key key, this.chatModel, this.sourchat}) : super(key: key);
   final ChatModel chatModel;
+  final ChatModel sourchat;
 
   @override
   _IndividualPageState createState() => _IndividualPageState();
@@ -42,9 +43,14 @@ class _IndividualPageState extends State<IndividualPage> {
       "autoConnect": false,
     });
     socket.connect();
-    socket.emit("/test", "Hello world");
+    socket.emit("signin", widget.sourchat.id);
     socket.onConnect((data) => print("Connected"));
     print(socket.connected);
+  }
+
+  void sendMessage(String message, int sourceId, int targetId) {
+    socket.emit("message",
+        {"message": message, "sourceId": sourceId, "targetId": targetId});
   }
 
   @override
@@ -279,16 +285,19 @@ class _IndividualPageState extends State<IndividualPage> {
                                 radius: 25,
                                 backgroundColor: Color(0xFF128C7E),
                                 child: IconButton(
-                                  icon: sendButton
-                                      ? Icon(
-                                          Icons.send,
-                                          color: Colors.white,
-                                        )
-                                      : Icon(
-                                          Icons.mic,
-                                          color: Colors.white,
-                                        ),
-                                  onPressed: () {},
+                                  icon: Icon(
+                                    sendButton ? Icons.send : Icons.mic,
+                                    color: Colors.white,
+                                  ),
+                                  onPressed: () {
+                                    if (sendButton) {
+                                      sendMessage(
+                                          _controller.text,
+                                          widget.sourchat.id,
+                                          widget.chatModel.id);
+                                      _controller.clear();
+                                    }
+                                  },
                                 ),
                               ),
                             ),

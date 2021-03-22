@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomCard extends StatelessWidget {
-  const CustomCard({Key key, this.chatModel}) : super(key: key);
+  const CustomCard({Key key, this.chatModel, this.sourchat}) : super(key: key);
   final ChatModel chatModel;
+  final ChatModel sourchat;
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +17,7 @@ class CustomCard extends StatelessWidget {
             MaterialPageRoute(
                 builder: (contex) => IndividualPage(
                       chatModel: chatModel,
+                      sourchat: sourchat,
                     )));
       },
       child: Column(
