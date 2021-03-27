@@ -3,26 +3,16 @@
 import 'package:chatapp/CustomUI/OwnMessgaeCrad.dart';
 import 'package:chatapp/CustomUI/ReplyCard.dart';
 import 'package:chatapp/Model/ChatModel.dart';
-import 'package:chatapp/Model/MessgeModel.dart';
+import 'package:chatapp/Model/MessageModel.dart';
 import 'package:emoji_picker/emoji_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class IndividualPage extends StatefulWidget {
-  IndividualPage(
-      {Key key,
-      this.chatModel,
-      this.data,
-      this.sendMessage,
-      this.sourceChat,
-      this.socket})
-      : super(key: key);
+  IndividualPage({Key key, this.chatModel, this.sourchat}) : super(key: key);
   final ChatModel chatModel;
-  final List<MessageModel> data;
-  final Function sendMessage;
-  final ChatModel sourceChat;
-  final IO.Socket socket;
+  final ChatModel sourchat;
 
   @override
   _IndividualPageState createState() => _IndividualPageState();
@@ -32,9 +22,8 @@ class _IndividualPageState extends State<IndividualPage> {
   bool show = false;
   FocusNode focusNode = FocusNode();
   bool sendButton = false;
-  List<MessageModel> messegse = [];
+  List<MessageModel> messages = [];
   IO.Socket socket;
-
   TextEditingController _controller = TextEditingController();
   @override
   void initState() {
@@ -58,34 +47,29 @@ class _IndividualPageState extends State<IndividualPage> {
       "autoConnect": false,
     });
     socket.connect();
-    socket.emit("/test", {"id": widget.sourceChat.id});
+    socket.emit("signin", widget.sourchat.id);
     socket.onConnect((data) {
       print("Connected");
-      socket.on("message", (e) {
-        print(e['message']);
-        setMessage("destination", e["message"], e["sourceId"]);
+      socket.on("message", (msg) {
+        print(msg);
+        setMessage("destination", msg["message"]);
       });
     });
+    print(socket.connected);
   }
 
-  void setMessage(String type, String message, int id) {
+  void sendMessage(String message, int sourceId, int targetId) {
+    setMessage("source", message);
+    socket.emit("message",
+        {"message": message, "sourceId": sourceId, "targetId": targetId});
+  }
+
+  void setMessage(String type, String message) {
     MessageModel messageModel = MessageModel(type: type, message: message);
+    print(messages);
 
     setState(() {
-      messegse.add(messageModel);
-    });
-    // print(messages[id].length);
-    // print(id);
-  }
-
-  void sendMessage(int targetId, String message) {
-    setMessage("source", message, targetId);
-    // MessageModel messageModel = MessageModel(type: "source", message: message);
-
-    socket.emit("message", {
-      "sourceId": widget.sourceChat.id,
-      "targetId": targetId,
-      "message": message
+      messages.add(messageModel);
     });
   }
 
@@ -207,15 +191,15 @@ class _IndividualPageState extends State<IndividualPage> {
                     height: MediaQuery.of(context).size.height - 150,
                     child: ListView.builder(
                       shrinkWrap: true,
-                      itemCount: messegse.length,
+                      itemCount: messages.length,
                       itemBuilder: (context, index) {
-                        if (messegse[index].type == "source") {
+                        if (messages[index].type == "source") {
                           return OwnMessageCard(
-                            message: messegse[index].message,
+                            message: messages[index].message,
                           );
                         } else {
                           return ReplyCard(
-                            message: messegse[index].message,
+                            message: messages[index].message,
                           );
                         }
                       },
@@ -315,20 +299,18 @@ class _IndividualPageState extends State<IndividualPage> {
                                 radius: 25,
                                 backgroundColor: Color(0xFF128C7E),
                                 child: IconButton(
-                                  icon: sendButton
-                                      ? Icon(
-                                          Icons.send,
-                                          color: Colors.white,
-                                        )
-                                      : Icon(
-                                          Icons.mic,
-                                          color: Colors.white,
-                                        ),
+                                  icon: Icon(
+                                    sendButton ? Icons.send : Icons.mic,
+                                    color: Colors.white,
+                                  ),
                                   onPressed: () {
-                                    sendMessage(
-                                        widget.chatModel.id, _controller.text);
-                                    // setState(() {});
-                                    _controller.clear();
+                                    if (sendButton) {
+                                      sendMessage(
+                                          _controller.text,
+                                          widget.sourchat.id,
+                                          widget.chatModel.id);
+                                      _controller.clear();
+                                    }
                                   },
                                 ),
                               ),

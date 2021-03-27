@@ -9,7 +9,6 @@ class ChatModel {
   String status;
   bool select = false;
   int id;
-  List<MessageModel> messges;
   ChatModel({
     this.name,
     this.icon,
@@ -19,6 +18,5 @@ class ChatModel {
     this.status,
     this.select = false,
     this.id,
-    this.messges,
   });
 }

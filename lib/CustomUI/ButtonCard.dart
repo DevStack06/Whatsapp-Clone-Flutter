@@ -1,6 +1,4 @@
-import 'package:chatapp/Model/ChatModel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class ButtonCard extends StatelessWidget {
   const ButtonCard({Key key, this.name, this.icon}) : super(key: key);

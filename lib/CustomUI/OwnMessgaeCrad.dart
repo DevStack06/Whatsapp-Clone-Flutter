@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 class OwnMessageCard extends StatelessWidget {
   const OwnMessageCard({Key key, this.message}) : super(key: key);
   final String message;
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
   @override
   Widget build(BuildContext context) {
     return Align(

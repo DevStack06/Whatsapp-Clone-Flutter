@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class CustomCard extends StatelessWidget {
+<<<<<<< HEAD
   const CustomCard(
       {Key key,
       this.chatModel,
@@ -19,6 +20,11 @@ class CustomCard extends StatelessWidget {
   final Function sendMessage;
   final ChatModel sourceChat;
   final IO.Socket socket;
+=======
+  const CustomCard({Key key, this.chatModel, this.sourchat}) : super(key: key);
+  final ChatModel chatModel;
+  final ChatModel sourchat;
+>>>>>>> master
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +35,14 @@ class CustomCard extends StatelessWidget {
             MaterialPageRoute(
                 builder: (contex) => IndividualPage(
                       chatModel: chatModel,
+<<<<<<< HEAD
                       data: data,
                       sendMessage: sendMessage,
                       sourceChat: sourceChat,
                       socket: socket,
+=======
+                      sourchat: sourchat,
+>>>>>>> master
                     )));
       },
       child: Column(

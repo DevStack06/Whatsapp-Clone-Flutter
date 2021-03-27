@@ -1,6 +1,5 @@
 import 'package:chatapp/CustomUI/ButtonCard.dart';
 import 'package:chatapp/Model/ChatModel.dart';
-import 'package:chatapp/Model/MessgeModel.dart';
 import 'package:chatapp/Screens/Homescreen.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +11,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  List<ChatModel> chatModels = [
+  ChatModel sourceChat;
+  List<ChatModel> chatmodels = [
     ChatModel(
       name: "Dev Stack",
       isGroup: false,
@@ -45,31 +45,36 @@ class _LoginScreenState extends State<LoginScreen> {
       icon: "person.svg",
       id: 4,
     ),
-  ];
 
+    // ChatModel(
+    //   name: "NodeJs Group",
+    //   isGroup: true,
+    //   currentMessage: "New NodejS Post",
+    //   time: "2:00",
+    //   icon: "group.svg",
+    // ),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
-          padding: EdgeInsets.only(top: 40),
-          itemCount: chatModels.length,
-          itemBuilder: (context, index) {
-            return InkWell(
+          itemCount: chatmodels.length,
+          itemBuilder: (contex, index) => InkWell(
                 onTap: () {
-                  ChatModel sourceChat = chatModels.removeAt(index);
+                  sourceChat = chatmodels.removeAt(index);
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                           builder: (builder) => Homescreen(
-                                chatmodel: chatModels,
-                                sourceChat: sourceChat,
+                                chatmodels: chatmodels,
+                                sourchat: sourceChat,
                               )));
                 },
                 child: ButtonCard(
-                  name: chatModels[index].name,
+                  name: chatmodels[index].name,
                   icon: Icons.person,
-                ));
-          }),
+                ),
+              )),
     );
   }
 }
