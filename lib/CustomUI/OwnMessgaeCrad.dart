@@ -3,10 +3,6 @@ import 'package:flutter/material.dart';
 class OwnMessageCard extends StatelessWidget {
   const OwnMessageCard({Key key, this.message}) : super(key: key);
   final String message;
-<<<<<<< HEAD
-=======
-
->>>>>>> master
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -42,7 +38,7 @@ class OwnMessageCard extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      "20:58",
+                      DateTime.now().toString().substring(10, 16),
                       style: TextStyle(
                         fontSize: 13,
                         color: Colors.grey[600],
