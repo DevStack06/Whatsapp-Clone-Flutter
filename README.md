@@ -17,37 +17,42 @@
 
 ### Some Screenshots of this series
 
-<h3 align="center" style="color:green" >1. Chat page</h3>
+<h3 align="center" style="color:green" >1. Home page</h3>
+ <p align="center">
+<img src="https://github.com/DevStack06/images/blob/master/ChatImages/homepage.png" width="350"></img>
+</p>
+<br>
+<h3 align="center" style="color:green" >2. Chat page</h3>
  <p align="center">
 <img src="https://github.com/DevStack06/images/blob/master/ChatImages/IndividualCHatPage.png" width="350"></img>
 </p>
 <br>
-<h3 align="center" style="color:green" >2. Camera Page</h3>
+<h3 align="center" style="color:green" >3. Camera Page</h3>
  <p align="center">
 <img src="https://github.com/DevStack06/images/blob/master/ChatImages/Camerapage.png" width="350"></img>
 </p>
 <br>
-<h3 align="center" style="color:green" >3. PopUp Menu Item</h3>
+<h3 align="center" style="color:green" >4. PopUp Menu Item</h3>
  <p align="center">
 <img src="https://github.com/DevStack06/images/blob/master/ChatImages/PopupMenuItem.png" width="350"></img>
 </p>
 <br>
-<h3 align="center" style="color:green" >4. Emoji Picker</h3>
+<h3 align="center" style="color:green" >5. Emoji Picker</h3>
  <p align="center">
 <img src="https://github.com/DevStack06/images/blob/master/ChatImages/EmojiPicker.png" width="350"></img>
 </p>
 <br>
-<h3 align="center" style="color:green" >5. Create Group Page</h3>
+<h3 align="center" style="color:green" >6. Create Group Page</h3>
  <p align="center">
 <img src="https://github.com/DevStack06/images/blob/master/ChatImages/SelectCOntactPage.png" width="350"></img>
 </p>
 <br>
-<h3 align="center" style="color:green" >6. Select COntact Page</h3>
+<h3 align="center" style="color:green" >7. Select COntact Page</h3>
  <p align="center">
 <img src="https://github.com/DevStack06/images/blob/master/ChatImages/newgroup.png" width="350"></img>
 </p>
 <br>
-<h3 align="center" style="color:green" >7.View Image/Video Page </h3>
+<h3 align="center" style="color:green" >8.View Image/Video Page </h3>
  <p align="center">
 <img src="https://github.com/DevStack06/images/blob/master/ChatImages/Viewphoto.png" width="350"></img>
 </p>
