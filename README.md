@@ -24,7 +24,7 @@
 <br>
 <h3 align="center" style="color:green" >2. Camera Page</h3>
  <p align="center">
-<img src="https://github.com/DevStack06/images/blob/master/ChatImages/EmojiPicker.png" width="350"></img>
+<img src="https://github.com/DevStack06/images/blob/master/ChatImages/Camerapage.png" width="350"></img>
 </p>
 <br>
 <h3 align="center" style="color:green" >3. PopUp Menu Item</h3>
