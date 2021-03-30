@@ -2,6 +2,8 @@
 
 ### Playlist for Chat App Development series -:
 
+<img src= "https://github.com/DevStack06/images/blob/master/ChatImages/chatapp.png" >
+
 | Playlist Name                                               |     | YouTube Playlist Link                                                        |
 | ----------------------------------------------------------- | --- | ---------------------------------------------------------------------------- |
 | Chat App Development (Main Playlist)                        |     | [Link](https://youtube.com/playlist?list=PLtIU0BH0pkKrgqaT-9JSrRRyetkVEkDn6) |
