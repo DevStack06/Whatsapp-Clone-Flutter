@@ -1,8 +1,8 @@
 ### Chat App Development Front-End and Back-End using Flutter, SocketIo, and NodeJS.
 
-### Playlist for Chat App Development series -:
-
 <img src= "https://github.com/DevStack06/images/blob/master/ChatImages/chatapp.png" >
+
+### Playlist for Chat App Development series -:
 
 | Playlist Name                                               |     | YouTube Playlist Link                                                        |
 | ----------------------------------------------------------- | --- | ---------------------------------------------------------------------------- |
@@ -10,6 +10,14 @@
 | Chat App Development (Only Front-End using Flutter)         |     | [Link](https://youtube.com/playlist?list=PLtIU0BH0pkKrgqaT-9JSrRRyetkVEkDn6) |
 | Chat Server Development (Only Back-End using Node/SocketIo) |     | [Link](https://youtube.com/playlist?list=PLtIU0BH0pkKqKm88PUSRWiKsZ50ztsITv) |
 
+<br>
+
+### Some Screenshots of this series
+
+<h3 align="center" style="color:green" >1. Chat page</h3>
+ <p align="center">
+<img src="https://github.com/DevStack06/images/blob/master/ChatImages/IndividualCHatPage.png" width="350"></img>
+</p>
 <br>
 
 ### Some Other playlist
