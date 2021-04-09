@@ -21,15 +21,15 @@ class IndividualPage extends StatefulWidget {
 class _IndividualPageState extends State<IndividualPage> {
   bool show = false;
   FocusNode focusNode = FocusNode();
-  IO.Socket socket;
   bool sendButton = false;
   List<MessageModel> messages = [];
-  ScrollController _scrollController = new ScrollController();
   TextEditingController _controller = TextEditingController();
+  IO.Socket socket;
   @override
   void initState() {
     super.initState();
-    connect();
+    // connect();
+
     focusNode.addListener(() {
       if (focusNode.hasFocus) {
         setState(() {
@@ -37,9 +37,11 @@ class _IndividualPageState extends State<IndividualPage> {
         });
       }
     });
+    connect();
   }
 
   void connect() {
+    // MessageModel messageModel = MessageModel(sourceId: widget.sourceChat.id.toString(),targetId: );
     socket = IO.io("http://192.168.43.92:5000", <String, dynamic>{
       "transports": ["websocket"],
       "autoConnect": false,
@@ -51,11 +53,6 @@ class _IndividualPageState extends State<IndividualPage> {
       socket.on("message", (msg) {
         print(msg);
         setMessage("destination", msg["message"]);
-        _scrollController.animateTo(
-          0.0,
-          curve: Curves.easeOut,
-          duration: const Duration(milliseconds: 300),
-        );
       });
     });
     print(socket.connected);
@@ -310,13 +307,6 @@ class _IndividualPageState extends State<IndividualPage> {
                                   ),
                                   onPressed: () {
                                     if (sendButton) {
-                                      _scrollController.animateTo(
-                                        _scrollController
-                                            .position.maxScrollExtent,
-                                        curve: Curves.easeOut,
-                                        duration:
-                                            const Duration(milliseconds: 300),
-                                      );
                                       sendMessage(
                                           _controller.text,
                                           widget.sourchat.id,
