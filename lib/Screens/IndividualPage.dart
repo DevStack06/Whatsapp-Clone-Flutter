@@ -191,8 +191,6 @@ class _IndividualPageState extends State<IndividualPage> {
                     height: MediaQuery.of(context).size.height - 150,
                     child: ListView.builder(
                       shrinkWrap: true,
-                      controller: _scrollController,
-                      // reverse: true,
                       itemCount: messages.length,
                       itemBuilder: (context, index) {
                         if (messages[index].type == "source") {
