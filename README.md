@@ -47,7 +47,7 @@
 <img src="https://github.com/DevStack06/images/blob/master/ChatImages/SelectCOntactPage.png" width="350"></img>
 </p>
 <br>
-<h3 align="center" style="color:green" >7. Select COntact Page</h3>
+<h3 align="center" style="color:green" >7. Select Contact Page</h3>
  <p align="center">
 <img src="https://github.com/DevStack06/images/blob/master/ChatImages/newgroup.png" width="350"></img>
 </p>

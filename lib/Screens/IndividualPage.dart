@@ -24,7 +24,7 @@ class _IndividualPageState extends State<IndividualPage> {
   IO.Socket socket;
   bool sendButton = false;
   List<MessageModel> messages = [];
-
+  ScrollController _scrollController = new ScrollController();
   TextEditingController _controller = TextEditingController();
   @override
   void initState() {
@@ -51,6 +51,11 @@ class _IndividualPageState extends State<IndividualPage> {
       socket.on("message", (msg) {
         print(msg);
         setMessage("destination", msg["message"]);
+        _scrollController.animateTo(
+          0.0,
+          curve: Curves.easeOut,
+          duration: const Duration(milliseconds: 300),
+        );
       });
     });
     print(socket.connected);
@@ -189,6 +194,8 @@ class _IndividualPageState extends State<IndividualPage> {
                     height: MediaQuery.of(context).size.height - 150,
                     child: ListView.builder(
                       shrinkWrap: true,
+                      controller: _scrollController,
+                      // reverse: true,
                       itemCount: messages.length,
                       itemBuilder: (context, index) {
                         if (messages[index].type == "source") {
@@ -303,6 +310,13 @@ class _IndividualPageState extends State<IndividualPage> {
                                   ),
                                   onPressed: () {
                                     if (sendButton) {
+                                      _scrollController.animateTo(
+                                        _scrollController
+                                            .position.maxScrollExtent,
+                                        curve: Curves.easeOut,
+                                        duration:
+                                            const Duration(milliseconds: 300),
+                                      );
                                       sendMessage(
                                           _controller.text,
                                           widget.sourchat.id,
