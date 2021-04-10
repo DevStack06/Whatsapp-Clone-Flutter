@@ -51,6 +51,7 @@ class OwnMessageCard extends StatelessWidget {
                     Icon(
                       Icons.done_all,
                       size: 20,
+                      color: Colors.blue,
                     ),
                   ],
                 ),
