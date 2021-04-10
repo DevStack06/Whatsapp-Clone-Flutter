@@ -1,8 +1,9 @@
+import 'package:chatapp/Model/MessageModel.dart';
 import 'package:flutter/material.dart';
 
 class ReplyCard extends StatelessWidget {
   const ReplyCard({Key key, this.message}) : super(key: key);
-  final String message;
+  final MessageModel message;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class ReplyCard extends StatelessWidget {
                   bottom: 10,
                 ),
                 child: Text(
-                  message,
+                  message.message,
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -37,7 +38,7 @@ class ReplyCard extends StatelessWidget {
                 bottom: 4,
                 right: 10,
                 child: Text(
-                  DateTime.now().toString().substring(10, 16),
+                  message.time,
                   style: TextStyle(
                     fontSize: 13,
                     color: Colors.grey[600],

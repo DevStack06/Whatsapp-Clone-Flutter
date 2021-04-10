@@ -55,7 +55,7 @@ class _IndividualPageState extends State<IndividualPage> {
         print(msg);
         setMessage("destination", msg["message"]);
         _scrollController.animateTo(
-          0.0,
+          _scrollController.position.maxScrollExtent,
           curve: Curves.easeOut,
           duration: const Duration(milliseconds: 300),
         );
@@ -71,7 +71,10 @@ class _IndividualPageState extends State<IndividualPage> {
   }
 
   void setMessage(String type, String message) {
-    MessageModel messageModel = MessageModel(type: type, message: message);
+    MessageModel messageModel = MessageModel(
+        type: type,
+        message: message,
+        time: DateTime.now().toString().substring(10, 16));
     print(messages);
 
     setState(() {
@@ -203,11 +206,11 @@ class _IndividualPageState extends State<IndividualPage> {
                       itemBuilder: (context, index) {
                         if (messages[index].type == "source") {
                           return OwnMessageCard(
-                            message: messages[index].message,
+                            message: messages[index],
                           );
                         } else {
                           return ReplyCard(
-                            message: messages[index].message,
+                            message: messages[index],
                           );
                         }
                       },
@@ -325,6 +328,9 @@ class _IndividualPageState extends State<IndividualPage> {
                                           widget.sourchat.id,
                                           widget.chatModel.id);
                                       _controller.clear();
+                                      setState(() {
+                                        sendButton = false;
+                                      });
                                     }
                                   },
                                 ),

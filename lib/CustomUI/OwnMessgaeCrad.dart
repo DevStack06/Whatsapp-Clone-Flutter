@@ -1,8 +1,9 @@
+import 'package:chatapp/Model/MessageModel.dart';
 import 'package:flutter/material.dart';
 
 class OwnMessageCard extends StatelessWidget {
   const OwnMessageCard({Key key, this.message}) : super(key: key);
-  final String message;
+  final MessageModel message;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -26,7 +27,7 @@ class OwnMessageCard extends StatelessWidget {
                   bottom: 20,
                 ),
                 child: Text(
-                  message,
+                  message.message,
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -38,7 +39,7 @@ class OwnMessageCard extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      DateTime.now().toString().substring(10, 16),
+                      message.time,
                       style: TextStyle(
                         fontSize: 13,
                         color: Colors.grey[600],
