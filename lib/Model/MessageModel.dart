@@ -1,5 +1,6 @@
 class MessageModel {
   String type;
   String message;
-  MessageModel({this.message, this.type});
+  String time;
+  MessageModel({this.message, this.type, this.time});
 }
