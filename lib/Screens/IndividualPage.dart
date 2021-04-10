@@ -33,17 +33,27 @@ class _IndividualPageState extends State<IndividualPage> {
 
     focusNode.addListener(() {
       if (focusNode.hasFocus) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          curve: Curves.easeOut,
+          duration: const Duration(milliseconds: 300),
+        );
         setState(() {
           show = false;
         });
       }
     });
+    // _scrollController.addListener(_scrollListener);
     connect();
   }
 
+  // _scrollListener() {
+  //   FocusScope.of(context).requestFocus(FocusNode());
+  // }
+
   void connect() {
     // MessageModel messageModel = MessageModel(sourceId: widget.sourceChat.id.toString(),targetId: );
-    socket = IO.io("http://192.168.43.92:5000", <String, dynamic>{
+    socket = IO.io("http://192.168.0.106:5000", <String, dynamic>{
       "transports": ["websocket"],
       "autoConnect": false,
     });
@@ -194,16 +204,21 @@ class _IndividualPageState extends State<IndividualPage> {
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: WillPopScope(
-              child: Stack(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Container(
-                    height: MediaQuery.of(context).size.height - 150,
+                  Expanded(
+                    // height: MediaQuery.of(context).size.height - 150,
                     child: ListView.builder(
                       shrinkWrap: true,
                       controller: _scrollController,
                       // reverse: true,
-                      itemCount: messages.length,
+                      itemCount: messages.length + 1,
                       itemBuilder: (context, index) {
+                        if (index == messages.length)
+                          return Container(
+                            height: 70,
+                          );
                         if (messages[index].type == "source") {
                           return OwnMessageCard(
                             message: messages[index],
@@ -216,8 +231,9 @@ class _IndividualPageState extends State<IndividualPage> {
                       },
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
+                  Container(
+                    // alignment: Alignment.bottomCenter,
+                    height: 60,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -285,13 +301,7 @@ class _IndividualPageState extends State<IndividualPage> {
                                         ),
                                         IconButton(
                                           icon: Icon(Icons.camera_alt),
-                                          onPressed: () {
-                                            // Navigator.push(
-                                            //     context,
-                                            //     MaterialPageRoute(
-                                            //         builder: (builder) =>
-                                            //             CameraApp()));
-                                          },
+                                          onPressed: () {},
                                         ),
                                       ],
                                     ),
