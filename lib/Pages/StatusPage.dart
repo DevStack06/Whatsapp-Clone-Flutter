@@ -1,3 +1,5 @@
+import 'package:chatapp/CustomUI/status/OtherStatusCard.dart';
+import 'package:chatapp/CustomUI/status/OwnStatusCard.dart';
 import 'package:flutter/material.dart';
 
 class StatusPage extends StatefulWidget {
@@ -38,6 +40,38 @@ class _StatusPageState extends State<StatusPage> {
             ),
           ),
         ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            OwnStatus(),
+            Container(
+              height: 33,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+              ),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 13, vertical: 7),
+                child: Text(
+                  "Recent updates",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5),
+                ),
+              ),
+            ),
+            OthersStatus(
+              name: "Balram Rathore",
+            ),
+            OthersStatus(name: "Kishor Kumar"),
+            OthersStatus(
+              name: " Saket Sinha",
+            ),
+            OthersStatus(
+              name: "Bhanudev Som",
+            ),
+          ],
+        ),
       ),
     );
   }
