@@ -9,7 +9,7 @@
 
 | Playlist Name                                               |     | YouTube Playlist Link                                                        |
 | ----------------------------------------------------------- | --- | ---------------------------------------------------------------------------- |
-| Chat App Development (Main Playlist)                        |     | [Link](https://youtube.com/playlist?list=PLtIU0BH0pkKrgqaT-9JSrRRyetkVEkDn6) |
+| Chat App Development (Main Playlist)                        |     | [Link](https://youtube.com/playlist?list=PLtIU0BH0pkKovuEaNsrGE_Xd5Tz3m1zeC) |
 | Chat App Development (Only Front-End using Flutter)         |     | [Link](https://youtube.com/playlist?list=PLtIU0BH0pkKrgqaT-9JSrRRyetkVEkDn6) |
 | Chat Server Development (Only Back-End using Node/SocketIo) |     | [Link](https://youtube.com/playlist?list=PLtIU0BH0pkKqKm88PUSRWiKsZ50ztsITv) |
 
@@ -74,7 +74,7 @@
 
 1. Clone this app using below syntax -:
 
-   > git clone https://github.com/DevStack06/Flutter-Blog-App.git
+   > git clone https://github.com/DevStack06/Whatsapp-Clone-Flutter.git
 
 2. After cloning install packages using below syntax -:
    > flutter pub get
