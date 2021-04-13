@@ -23,7 +23,7 @@ class OwnStatus extends StatelessWidget {
               backgroundColor: Colors.greenAccent[700],
               child: Icon(
                 Icons.add,
-                size: 18,
+                size: 20,
                 color: Colors.white,
               ),
             ),
@@ -34,6 +34,7 @@ class OwnStatus extends StatelessWidget {
         "My status",
         style: TextStyle(
           fontWeight: FontWeight.bold,
+          color: Colors.black,
         ),
       ),
       subtitle: Text(
