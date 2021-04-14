@@ -36,7 +36,7 @@
 <br>
 <h3 align="center" style="color:green" >4. Status Page</h3>
  <p align="center">
-<img src="https://github.com/DevStack06/images/blob/master/ChatImages/StatusPage.png" width="600" height="500px"></img>
+<img src="https://github.com/DevStack06/images/blob/master/ChatImages/StatusPage.png" width="400" height="500px"></img>
 </p>
 <br>
 <h3 align="center" style="color:green" >5. PopUp Menu Item</h3>
