@@ -34,27 +34,32 @@
 <img src="https://github.com/DevStack06/images/blob/master/ChatImages/Camerapage.png" width="350"></img>
 </p>
 <br>
-<h3 align="center" style="color:green" >4. PopUp Menu Item</h3>
+<h3 align="center" style="color:green" >4. Status Page</h3>
+ <p align="center">
+<img src="https://github.com/DevStack06/images/blob/master/ChatImages/StatusPage.png" width="350"></img>
+</p>
+<br>
+<h3 align="center" style="color:green" >5. PopUp Menu Item</h3>
  <p align="center">
 <img src="https://github.com/DevStack06/images/blob/master/ChatImages/PopupMenuItem.png" width="350"></img>
 </p>
 <br>
-<h3 align="center" style="color:green" >5. Emoji Picker</h3>
+<h3 align="center" style="color:green" >6. Emoji Picker</h3>
  <p align="center">
 <img src="https://github.com/DevStack06/images/blob/master/ChatImages/EmojiPicker.png" width="350"></img>
 </p>
 <br>
-<h3 align="center" style="color:green" >6. Create Group Page</h3>
+<h3 align="center" style="color:green" >7. Create Group Page</h3>
  <p align="center">
 <img src="https://github.com/DevStack06/images/blob/master/ChatImages/SelectCOntactPage.png" width="350"></img>
 </p>
 <br>
-<h3 align="center" style="color:green" >7. Select Contact Page</h3>
+<h3 align="center" style="color:green" >8. Select Contact Page</h3>
  <p align="center">
 <img src="https://github.com/DevStack06/images/blob/master/ChatImages/newgroup.png" width="350"></img>
 </p>
 <br>
-<h3 align="center" style="color:green" >8.View Image/Video Page </h3>
+<h3 align="center" style="color:green" >9.View Image/Video Page </h3>
  <p align="center">
 <img src="https://github.com/DevStack06/images/blob/master/ChatImages/Viewphoto.png" width="350"></img>
 </p>
