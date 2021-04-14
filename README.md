@@ -1,4 +1,6 @@
-### Chat App Development Front-End and Back-End using Flutter, SocketIo, and NodeJS.
+### Chat App Development Front-End and Back-End using Flutter, SocketIo, and NodeJS. (Limited code)
+
+#### For Full Code Mail me: [devstackin@gmail.com](devstackin@gmail.com)
 
 <br>
 
