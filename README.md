@@ -1,11 +1,24 @@
 ### Chat App Development Front-End and Back-End using Flutter, SocketIo, and NodeJS. (Limited code)
 
+
+
+<a href="https://www.buymeacoffee.com/DevStack06" target="_blank"  align="center">
+    <p  align="center">
+   <img   src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174">
+   </p>
+</a>
+
+<p align="center">
+( For full code you can mail me:
+ <a href="mailto:devstackin@gmail.com"> devstackin@gmail.com</a>
+ )
+</p>
+
+
+
+<img src= "https://github.com/DevStack06/images/blob/master/ChatImages/chatapp.png"></img>
 #### For Full Code Mail me: [devstackin@gmail.com](mailto:devstackin@gmail.com)
 
-<br>
-
-<img src= "https://github.com/DevStack06/images/blob/master/ChatImages/chatapp.png" >
-<br>
 
 ### Playlist for Chat App Development series -:
 
