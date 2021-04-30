@@ -17,7 +17,7 @@
 
 
 <img src= "https://github.com/DevStack06/images/blob/master/ChatImages/chatapp.png"></img>
-#### For Full Code Mail me: [devstackin@gmail.com](mailto:devstackin@gmail.com)
+
 
 
 ### Playlist for Chat App Development series -:
