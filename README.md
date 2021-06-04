@@ -9,7 +9,7 @@
 </a>
 
 <p align="center">
-( For full code you can mail me:
+( You can buy the full code on $30 (mail me):
  <a href="mailto:devstackin@gmail.com"> devstackin@gmail.com</a>
  )
 </p>
