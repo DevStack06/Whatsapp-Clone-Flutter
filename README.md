@@ -33,7 +33,7 @@
 ### Some Screenshots of this series
 <h3 align="center" style="color:green" >1. Landing Page</h3>
  <p align="center">
-<img src="https://github.com/DevStack06/images/blob/master/ChatImages/LandingPage.png" width="900"></img>
+<img src="https://github.com/DevStack06/images/blob/master/ChatImages/LandingPage.png" width="500"></img>
 </p>
 <br>
 <h3 align="center" style="color:green" >2. Login Page</h3>
