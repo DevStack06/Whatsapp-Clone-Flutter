@@ -69,7 +69,7 @@
 <br>
 <h3 align="center" style="color:green" >8. Camera Page</h3>
  <p align="center">
-<img src="https://github.com/DevStack06/images/blob/master/ChatImages/Camerapage.png" width="300"></img>
+<img src="https://github.com/DevStack06/images/blob/master/ChatImages/Camerapage.png" width="450"></img>
 </p>
 <br>
 <h3 align="center" style="color:green" >9. Status Page</h3>
@@ -94,7 +94,7 @@
 <br>
 <h3 align="center" style="color:green" >13. Select Contact Page</h3>
  <p align="center">
-<img src="https://github.com/DevStack06/images/blob/master/ChatImages/newgroup.png" width="450"></img>
+<img src="https://github.com/DevStack06/images/blob/master/ChatImages/newgroup.png" width="500"></img>
 </p>
 <br>
 <h3 align="center" style="color:green" >14.View Image/Video Page </h3>
