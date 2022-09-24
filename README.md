@@ -14,7 +14,19 @@
  )
 </p>
 
+In this full tutrial source code you will get:
+- One to one chatting
+- One to one file sharing
+- All the basic UI of whatsapp
+- Camera and Video integration
+- Socket Integration 
 
+Things are not there yet:
+- Database integration
+- Group chat functionality
+- Calling and Voice features
+
+**Please note in $30 you will going to get the full tutorial code, which I have covered in youtube, It is just a tutorial code not real whatsapp code**
 
 <img src= "https://github.com/DevStack06/images/blob/master/ChatImages/chatapp.png"></img>
 
