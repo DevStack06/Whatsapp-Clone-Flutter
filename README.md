@@ -1,18 +1,3 @@
-### Chat App Development Front-End and Back-End using Flutter, SocketIo, and NodeJS. (Limited code)
-
-
-
-<a href="https://www.buymeacoffee.com/DevStack06" target="_blank"  align="center">
-    <p  align="center">
-   <img   src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174">
-   </p>
-</a>
-
-<p align="center">
-( You can buy the full source code of tutorial in $30 (mail me):
- <a href="mailto:devstackin@gmail.com"> devstackin@gmail.com</a>
- )
-</p>
 
 In this full tutrial source code you will get:
 - One to one chatting
